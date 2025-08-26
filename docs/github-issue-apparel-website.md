@@ -33,8 +33,8 @@
 - [ ] **目標**: 「ReactアプリをS3で公開する」経験を積む
 
 ### ④ AmplifyでCI/CD構築（自動デプロイ）
-- [ ] AmplifyでGitHubとの連携を設定
-- [ ] 自動デプロイフローの構築：
+- [x] AmplifyでGitHubとの連携を設定
+- [x] 自動デプロイフローの構築：
   - GitHubへpush
   - Amplifyが自動実行：
     - `npm install`
@@ -43,7 +43,7 @@
   - 数分後にAmplifyのURLが更新
 
 ### ⑤ 継続的開発フローの確立
-- [ ] 以下の開発サイクルを構築：
+- [x] 以下の開発サイクルを構築：
   1. ローカルで修正
   2. `git commit` & `git push`
   3. Amplifyが自動でビルド & デプロイ
