@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Logo from './Logo';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,35 +10,38 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white shadow-sm relative z-40">
+      <header className="bg-brand-secondary shadow-sm relative z-40">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+            {/* ShuShuRin Logo */}
             <div className="flex items-center">
-              <h1 className="font-display text-2xl font-bold text-primary-900">
-                ShuShuRin
-              </h1>
+              <Logo 
+                showText={true} 
+                color="gold" 
+                size="md" 
+                className="cursor-pointer"
+              />
             </div>
 
             {/* Hamburger Menu Button */}
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-lg hover:bg-warm-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
+              className="p-2 rounded-lg hover:bg-accent-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
               aria-label="メニューを開く"
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
-                  className={`block w-6 h-0.5 bg-neutral-900 transition-all duration-300 ${
+                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 ${
                     isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
                   }`}
                 ></span>
                 <span
-                  className={`block w-6 h-0.5 bg-neutral-900 transition-all duration-300 mt-1 ${
+                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 mt-1 ${
                     isMenuOpen ? 'opacity-0' : ''
                   }`}
                 ></span>
                 <span
-                  className={`block w-6 h-0.5 bg-neutral-900 transition-all duration-300 mt-1 ${
+                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 mt-1 ${
                     isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
                   }`}
                 ></span>
@@ -57,7 +61,7 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       <nav
-        className={`fixed top-0 right-0 h-full w-80 max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-xs bg-brand-secondary shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -66,12 +70,12 @@ const Header = () => {
           <div className="flex justify-end mb-8">
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-lg hover:bg-warm-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-300"
+              className="p-2 rounded-lg hover:bg-accent-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
               aria-label="メニューを閉じる"
             >
               <div className="w-6 h-6 flex items-center justify-center">
-                <span className="block w-6 h-0.5 bg-neutral-900 rotate-45 absolute"></span>
-                <span className="block w-6 h-0.5 bg-neutral-900 -rotate-45 absolute"></span>
+                <span className="block w-6 h-0.5 bg-brand-primary rotate-45 absolute"></span>
+                <span className="block w-6 h-0.5 bg-brand-primary -rotate-45 absolute"></span>
               </div>
             </button>
           </div>
@@ -80,42 +84,42 @@ const Header = () => {
           <div className="space-y-1">
             <a
               href="/"
-              className="block px-4 py-3 text-lg font-medium text-neutral-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors duration-200"
+              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               ホーム
             </a>
             <a
               href="/concept"
-              className="block px-4 py-3 text-lg font-medium text-neutral-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors duration-200"
+              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               コンセプト
             </a>
             <a
               href="/coordinate"
-              className="block px-4 py-3 text-lg font-medium text-neutral-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors duration-200"
+              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               コーディネート
             </a>
             <a
               href="/brand-story"
-              className="block px-4 py-3 text-lg font-medium text-neutral-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors duration-200"
+              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               ブランドストーリー
             </a>
             <a
               href="/access"
-              className="block px-4 py-3 text-lg font-medium text-neutral-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors duration-200"
+              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               アクセス
             </a>
             <a
               href="/contact"
-              className="block px-4 py-3 text-lg font-medium text-neutral-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors duration-200"
+              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               お問い合わせ
@@ -123,12 +127,12 @@ const Header = () => {
           </div>
 
           {/* Instagram Link */}
-          <div className="mt-8 pt-6 border-t border-neutral-200">
+          <div className="mt-8 pt-6 border-t border-sophisticated-100">
             <a
               href="https://instagram.com/shushurin_select"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center px-4 py-3 text-base text-neutral-600 hover:text-primary-600 transition-colors duration-200"
+              className="flex items-center px-4 py-3 text-base text-sophisticated-500 hover:text-brand-accent transition-colors duration-200"
               onClick={toggleMenu}
             >
               <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
