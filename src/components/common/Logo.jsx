@@ -1,4 +1,6 @@
 import React from 'react';
+import LogoBlack from '../../assets/images/logo/square/shushurin-symbol-black.svg';
+import LogoWhite from '../../assets/images/logo/square/shushurin-symbol-white.svg';
 
 /**
  * ShuShuRin ロゴコンポーネント（新仕様）
@@ -10,16 +12,16 @@ import React from 'react';
  */
 const Logo = ({ 
   showText = true, 
-  color = 'gold', 
+  color = 'black',
   size = 'md', 
   className = '' 
 }) => {
   // シンボルサイズの定義
   const symbolSizes = {
-    sm: 'w-6 h-6',
-    md: 'w-8 h-8', 
-    lg: 'w-12 h-12',
-    xl: 'w-16 h-16'
+    sm: 'h-6',
+    md: 'h-8', 
+    lg: 'h-12',
+    xl: 'h-16'
   };
 
   // テキストサイズの定義
@@ -30,37 +32,44 @@ const Logo = ({
     xl: 'text-3xl'
   };
 
+  // ロゴ画像を color に応じて切り替え
+  const imageSrc = color === 'white' ? LogoBlack : LogoWhite;
+
   // カラーの定義
-  const colorClasses = {
-    gold: 'text-brand-gold',
-    black: 'text-brand-primary',
-    white: 'text-white'
-  };
+  // const colorClasses = {
+  //   gold: 'text-brand-gold',
+  //   black: 'text-brand-primary',
+  //   white: 'text-white'
+  // };
 
   // 影効果の設定（白い場合のみ）
-  const shadowClass = color === 'white' ? 'drop-shadow-lg' : '';
+  // const shadowClass = color === 'white' ? 'drop-shadow-lg' : '';
 
   // プレースホルダーSVGシンボル（将来的に実際のロゴファイルに置き換え）
-  const PlaceholderSymbol = () => (
-    <svg 
-      viewBox="0 0 80 80" 
-      fill="currentColor" 
-      className={`${symbolSizes[size]} ${colorClasses[color]} ${shadowClass}`}
-    >
-      <circle cx="40" cy="40" r="30" fill="currentColor" fillOpacity="0.1" />
-      <path 
-        d="M40 15 L60 40 L40 65 L20 40 Z" 
-        fill="currentColor"
-      />
-      <circle cx="40" cy="40" r="8" fill="currentColor" fillOpacity="0.3" />
-    </svg>
-  );
+  // const PlaceholderSymbol = () => (
+  //   <svg 
+  //     viewBox="0 0 80 80" 
+  //     fill="currentColor" 
+  //     className={`${symbolSizes[size]} ${colorClasses[color]} ${shadowClass}`}
+  //   >
+  //     <circle cx="40" cy="40" r="30" fill="currentColor" fillOpacity="0.1" />
+  //     <path 
+  //       d="M40 15 L60 40 L40 65 L20 40 Z" 
+  //       fill="currentColor"
+  //     />
+  //     <circle cx="40" cy="40" r="8" fill="currentColor" fillOpacity="0.3" />
+  //   </svg>
+  // );
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <PlaceholderSymbol />
+      <img 
+        src={imageSrc} 
+        alt="ShuShuRin Logo"  
+        className={`${symbolSizes[size]} w-auto`} 
+      />
       {showText && (
-        <span className={`font-display ${textSizes[size]} ${color === 'white' ? 'text-white' : 'text-brand-primary'} ${shadowClass} font-medium tracking-wide`}>
+        <span className={`font-display ${textSizes[size]} ${color === 'white' ? 'text-white' : 'text-brand-primary'} font-medium tracking-wide`}>
           ShuShuRin
         </span>
       )}

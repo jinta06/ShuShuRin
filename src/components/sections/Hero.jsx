@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../common/Logo';
-// import heroImage from '../../assets/images/logo/hero/hero-main-visual.webp';
+import heroImage from '../../assets/images/hero/hero-main-visual.webp';
 
 /**
  * ShuShuRin ヒーローセクション
@@ -28,8 +28,8 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-        //   backgroundImage: `url(${heroImage})`,
-          backgroundImage: 'url(/images/hero/hero-main-visual.webp)',
+          backgroundImage: `url(${heroImage})`,
+          // backgroundImage: 'url(/images/hero/hero-main-visual.webp)',
           filter: 'brightness(0.75) contrast(1.05) saturate(0.9)'
         }}
       />

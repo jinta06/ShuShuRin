@@ -17,7 +17,7 @@ const Header = () => {
             <div className="flex items-center">
               <Logo 
                 showText={true} 
-                color="gold" 
+                color="black" 
                 size="md" 
                 className="cursor-pointer"
               />
