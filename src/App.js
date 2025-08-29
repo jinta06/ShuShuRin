@@ -3,10 +3,11 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Loading from './components/common/Loading';
 import Hero from './components/sections/Hero';
+import ConceptSection from './components/sections/ConceptSection';
+import InstagramSection from './components/sections/InstagramSection';
 import Button from './components/ui/Button';
 import Card from './components/ui/Card';
 import Modal from './components/ui/Modal';
-import Carousel from './components/ui/Carousel';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,27 +25,7 @@ function App() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // Carousel demo data
-  const carouselItems = [
-    {
-      id: 1,
-      title: 'エレガントなコーディネート',
-      description: '上品でスタイリッシュなスタイリング',
-      image: 'https://via.placeholder.com/600x400/C8A882/2C2C2C?text=Style+1'
-    },
-    {
-      id: 2,
-      title: 'カジュアルなスタイル',
-      description: '日常使いできるリラックススタイル',
-      image: 'https://via.placeholder.com/600x400/F8F6F3/2C2C2C?text=Style+2'
-    },
-    {
-      id: 3,
-      title: '特別な日のスタイル',
-      description: '記念日や特別なシーンに',
-      image: 'https://via.placeholder.com/600x400/D4AF37/2C2C2C?text=Style+3'
-    }
-  ];
+
 
   return (
     <div className="min-h-screen bg-brand-secondary">
@@ -54,223 +35,126 @@ function App() {
       {/* Hero Section - Phase 3 Issue #5 */}
       <Hero />
 
+      {/* Concept Section - Phase 3 Issue #6 */}
+      <ConceptSection />
+
       {/* Main Content */}
       <main className="min-h-screen">
 
-        {/* Component Demo Section */}
-        <section className="px-4 py-8 bg-neutral-elegant">
-          <div className="max-w-md mx-auto text-center">
-            <h3 className="font-display text-xl font-semibold text-brand-primary mb-6">
-              ✨ ShuShuRin 共通コンポーネント完成！
-            </h3>
-            
-            <div className="space-y-4 mb-8">
-              <div className="p-4 bg-accent-50 rounded-lg text-left">
-                <h4 className="font-semibold text-brand-primary mb-2">✅ Header</h4>
-                <p className="text-sm text-sophisticated-500">
-                  ロゴ・ハンバーガーメニュー・ナビゲーション機能
-                </p>
-              </div>
-              
-              <div className="p-4 bg-sophisticated-50 rounded-lg text-left">
-                <h4 className="font-semibold text-brand-primary mb-2">✅ Footer</h4>
-                <p className="text-sm text-sophisticated-500">
-                  Instagram DM案内・ブランドメッセージ・コピーライト
-                </p>
-              </div>
-              
-              <div className="p-4 bg-brand-secondary rounded-lg text-left border border-brand-accent">
-                <h4 className="font-semibold text-brand-primary mb-2">✅ Navigation</h4>
-                <p className="text-sm text-sophisticated-500">
-                  スマホ用スライドアウトメニュー（Headerに組み込み済み）
-                </p>
-              </div>
-              
-              <div className="p-4 bg-accent-100 rounded-lg text-left">
-                <h4 className="font-semibold text-brand-primary mb-2">✅ Loading</h4>
-                <p className="text-sm text-sophisticated-500">
-                  ShuShuRinらしいローディングアニメーション
-                </p>
-              </div>
-            </div>
+        {/* Instagram Section - Issue #7 */}
+        <InstagramSection />
 
-            {/* Loading Demo Button */}
-            <button
-              onClick={handleLoadingDemo}
-              className="btn-secondary mb-6"
-              disabled={isLoading}
-            >
-              Loading デモを見る
-            </button>
-
-            <p className="text-sophisticated-500 text-sm">
-              右上のメニューボタンでナビゲーションを試してみてください！
-            </p>
-          </div>
-        </section>
-
-        {/* Philosophy Section */}
-        <section id="philosophy-section" className="py-16 bg-white">
-          <div className="max-w-2xl mx-auto px-4 text-center">
-            <div className="mb-8">
-              <div className="w-16 h-0.5 bg-brand-accent mx-auto mb-8"></div>
-              <h3 className="font-display text-2xl font-light text-brand-primary mb-8 tracking-wide">
-                ShuShuRin's Philosophy
-              </h3>
-            </div>
-            
-            <h4 className="font-display text-xl font-medium text-brand-primary mb-8 leading-relaxed">
-              それは、自由というスタイル。
-            </h4>
-            
-            <div className="space-y-6 text-sophisticated-500 leading-relaxed">
-              <p>
-                ShuShuRinが手掛けるのは"心ときめく日常着"。<br />
-                毎日、毎年、着たくなるスタンダードで心地よいシルエット。<br />
-                そして、気持ちが上がる素敵な色合いと上質な素材。
-              </p>
-              <p>
-                年齢にとらわれず、今の自分がときめく一着を<br />
-                自由に選んでほしい。あなたらしさを大切にした<br />
-                スタイリングを一緒に見つけませんか？
-              </p>
-            </div>
-            
-            <div className="mt-12">
-              <Button variant="outline" onClick={openModal}>
-                コーディネート相談をする
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Experience Section */}
+        {/* Coordinate Preview Section - 将来実装予定 */}
         <section className="py-16 bg-brand-secondary">
-          <div className="max-w-4xl mx-auto px-4">
+          <div className="max-w-lg mx-auto px-4">
             <div className="text-center mb-12">
-              <div className="w-16 h-0.5 bg-brand-accent mx-auto mb-8"></div>
               <h3 className="font-display text-2xl font-light text-brand-primary mb-4 tracking-wide">
-                Experience ShuShuRin
+                Coordinate
               </h3>
-            </div>
-
-            {/* Carousel Demo */}
-            <div className="mb-12">
-              <Carousel 
-                items={carouselItems}
-                autoPlay={true}
-                autoPlayInterval={5000}
-                renderItem={(item) => (
-                  <div className="relative">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-full aspect-[4/3] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                      <h4 className="font-display text-xl font-medium mb-2">
-                        {item.title}
-                      </h4>
-                      <p className="text-white/90 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              />
-            </div>
-
-            {/* Interactive Demo */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h4 className="font-display text-lg font-medium text-brand-primary mb-4">
-                  あなたのスタイルを見つける
-                </h4>
-                <p className="text-sophisticated-500 leading-relaxed mb-6">
-                  お客様一人ひとりの個性を大切に、<br />
-                  似合う色や形をご提案いたします。<br />
-                  InstagramのDMでお気軽にご相談ください。
-                </p>
-                <div className="space-y-3">
-                  <Button variant="primary" onClick={() => alert('Instagram DMへ移動')} fullWidth>
-                    Instagram DM で相談
-                  </Button>
-                  <Button variant="elegant" onClick={handleLoadingDemo} fullWidth disabled={isLoading}>
-                    {isLoading ? 'ロード中...' : 'ローディング体験'}
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="p-6 bg-white rounded-2xl shadow-sm border border-sophisticated-100">
-                  <h5 className="font-display font-medium text-brand-primary mb-2">パーソナル診断</h5>
-                  <p className="text-sophisticated-500 text-sm">あなたに似合う色とスタイルを診断</p>
-                </div>
-                <div className="p-6 bg-white rounded-2xl shadow-sm border border-sophisticated-100">
-                  <h5 className="font-display font-medium text-brand-primary mb-2">コーディネート提案</h5>
-                  <p className="text-sophisticated-500 text-sm">ライフスタイルに合わせたスタイリング</p>
-                </div>
-                <div className="p-6 bg-white rounded-2xl shadow-sm border border-sophisticated-100">
-                  <h5 className="font-display font-medium text-brand-primary mb-2">アフターサポート</h5>
-                  <p className="text-sophisticated-500 text-sm">購入後の着回し相談も承ります</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Design System Showcase */}
-        <section className="py-16 bg-neutral-elegant">
-          <div className="max-w-3xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <div className="w-16 h-0.5 bg-brand-accent mx-auto mb-8"></div>
-              <h3 className="font-display text-2xl font-light text-brand-primary mb-4 tracking-wide">
-                Design Elements
-              </h3>
-              <p className="text-sophisticated-500">
-                ShuShuRinのデザインシステムをご体験ください
+              <p className="text-sophisticated-500 text-sm">
+                ShuShuRinが提案するスタイリング
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Buttons Showcase */}
-              <div className="bg-white p-8 rounded-2xl shadow-sm">
-                <h4 className="font-display font-medium text-brand-primary mb-6">Interactive Elements</h4>
-                <div className="space-y-4">
-                  <Button variant="primary" onClick={() => alert('Primary Action')} fullWidth>
-                    プライマリアクション
-                  </Button>
-                  <Button variant="elegant" onClick={() => alert('Elegant Action')} fullWidth>
-                    エレガントアクション
-                  </Button>
-                  <Button variant="outline" onClick={() => alert('Secondary Action')} fullWidth>
-                    セカンダリアクション
-                  </Button>
+            {/* プレースホルダーカード */}
+            <div className="space-y-6">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
+                <h4 className="font-display font-medium text-brand-primary mb-4">
+                  エレガントなコーディネート
+                </h4>
+                <p className="text-sophisticated-500 text-sm leading-relaxed mb-4">
+                  上品でスタイリッシュなスタイリングをご提案。
+                  年齢を重ねても素敵に着こなせるアイテムを中心に組み合わせています。
+                </p>
+                <div className="h-32 bg-gradient-to-br from-accent-100 to-accent-200 rounded-xl flex items-center justify-center">
+                  <span className="text-sophisticated-500 text-sm">コーディネート写真</span>
                 </div>
               </div>
-
-              {/* Typography Showcase */}
-              <div className="bg-white p-8 rounded-2xl shadow-sm">
-                <h4 className="font-display font-medium text-brand-primary mb-6">Typography & Colors</h4>
-                <div className="space-y-4">
-                  <div className="text-brand-primary font-display text-lg">Display Font - Noto Serif JP</div>
-                  <div className="text-sophisticated-500 font-elegant">Body Font - Inter</div>
-                  <div className="flex gap-3 mt-4">
-                    <div className="w-8 h-8 rounded-full bg-brand-primary"></div>
-                    <div className="w-8 h-8 rounded-full bg-brand-accent"></div>
-                    <div className="w-8 h-8 rounded-full bg-brand-gold"></div>
-                    <div className="w-8 h-8 rounded-full bg-sophisticated-500"></div>
-                  </div>
+              
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
+                <h4 className="font-display font-medium text-brand-primary mb-4">
+                  カジュアルなスタイル
+                </h4>
+                <p className="text-sophisticated-500 text-sm leading-relaxed mb-4">
+                  日常使いできるリラックススタイル。
+                  快適さと上品さを両立したアイテムをセレクトしています。
+                </p>
+                <div className="h-32 bg-gradient-to-br from-sophisticated-100 to-sophisticated-200 rounded-xl flex items-center justify-center">
+                  <span className="text-sophisticated-500 text-sm">コーディネート写真</span>
                 </div>
               </div>
             </div>
 
             <div className="text-center mt-12">
-              <p className="text-sophisticated-500 text-sm leading-relaxed">
-                すべてのUIコンポーネントが完成しました。<br />
-                次は Phase 3: ホームページ実装に進みます ✨
+              <button 
+                className="
+                  px-6 py-3 rounded-full 
+                  font-display text-sm
+                  border-2 border-brand-accent text-brand-accent
+                  bg-transparent hover:bg-brand-accent hover:text-white
+                  shadow-sm hover:shadow-lg
+                  transform hover:scale-105 active:scale-95
+                  transition-all duration-200
+                  focus:ring-4 focus:ring-brand-accent/30
+                  focus:outline-none
+                "
+                onClick={() => {
+                  console.log('Navigate to /coordinate');
+                  alert('コーディネート一覧ページに移動します（将来実装予定）');
+                }}
+              >
+                コーディネート一覧を見る
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Access Section Preview - 将来実装予定 */}
+        <section className="py-16 bg-white">
+          <div className="max-w-lg mx-auto px-4 text-center">
+            <div className="mb-8">
+              <h3 className="font-display text-2xl font-light text-brand-primary mb-4 tracking-wide">
+                Access
+              </h3>
+              <p className="text-sophisticated-500 text-sm">
+                お気軽にお越しください
               </p>
+            </div>
+            
+            <div className="bg-brand-secondary rounded-2xl p-8 shadow-sm">
+              <div className="space-y-4 text-sophisticated-500 text-sm">
+                <div>
+                  <h4 className="font-medium text-brand-primary mb-1">住所</h4>
+                  <p>東京都渋谷区神宮前1-2-3<br />ShuShuRin Building 1F</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-brand-primary mb-1">営業時間</h4>
+                  <p>平日 11:00-19:00<br />土日祝 10:00-20:00</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-brand-primary mb-1">定休日</h4>
+                  <p>火曜日</p>
+                </div>
+              </div>
+              
+              <div className="mt-8">
+                <button 
+                  className="
+                    px-6 py-3 rounded-full 
+                    font-display text-sm
+                    border-2 border-brand-accent text-brand-accent
+                    bg-transparent hover:bg-brand-accent hover:text-white
+                    shadow-sm hover:shadow-lg
+                    transform hover:scale-105 active:scale-95
+                    transition-all duration-200
+                    focus:ring-4 focus:ring-brand-accent/30
+                    focus:outline-none
+                  "
+                  onClick={openModal}
+                >
+                  来店予約・お問い合わせ
+                </button>
+              </div>
             </div>
           </div>
         </section>
