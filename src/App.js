@@ -5,6 +5,7 @@ import Loading from './components/common/Loading';
 import Hero from './components/sections/Hero';
 import ConceptSection from './components/sections/ConceptSection';
 import InstagramSection from './components/sections/InstagramSection';
+import AccessInfo from './components/sections/AccessInfo';
 import Button from './components/ui/Button';
 import Card from './components/ui/Card';
 import Modal from './components/ui/Modal';
@@ -13,16 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Loading demo function
-  const handleLoadingDemo = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  };
-
   // Modal demo functions
-  const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
 
@@ -99,7 +91,6 @@ function App() {
                   focus:outline-none
                 "
                 onClick={() => {
-                  console.log('Navigate to /coordinate');
                   alert('コーディネート一覧ページに移動します（将来実装予定）');
                 }}
               >
@@ -109,55 +100,8 @@ function App() {
           </div>
         </section>
 
-        {/* Access Section Preview - 将来実装予定 */}
-        <section className="py-16 bg-white">
-          <div className="max-w-lg mx-auto px-4 text-center">
-            <div className="mb-8">
-              <h3 className="font-display text-2xl font-light text-brand-primary mb-4 tracking-wide">
-                Access
-              </h3>
-              <p className="text-sophisticated-500 text-sm">
-                お気軽にお越しください
-              </p>
-            </div>
-            
-            <div className="bg-brand-secondary rounded-2xl p-8 shadow-sm">
-              <div className="space-y-4 text-sophisticated-500 text-sm">
-                <div>
-                  <h4 className="font-medium text-brand-primary mb-1">住所</h4>
-                  <p>東京都渋谷区神宮前1-2-3<br />ShuShuRin Building 1F</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-brand-primary mb-1">営業時間</h4>
-                  <p>平日 11:00-19:00<br />土日祝 10:00-20:00</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-brand-primary mb-1">定休日</h4>
-                  <p>火曜日</p>
-                </div>
-              </div>
-              
-              <div className="mt-8">
-                <button 
-                  className="
-                    px-6 py-3 rounded-full 
-                    font-display text-sm
-                    border-2 border-brand-accent text-brand-accent
-                    bg-transparent hover:bg-brand-accent hover:text-white
-                    shadow-sm hover:shadow-lg
-                    transform hover:scale-105 active:scale-95
-                    transition-all duration-200
-                    focus:ring-4 focus:ring-brand-accent/30
-                    focus:outline-none
-                  "
-                  onClick={openModal}
-                >
-                  来店予約・お問い合わせ
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Access Section - Issue #7.5 */}
+        <AccessInfo />
 
         {/* Loading Demo */}
         {isLoading && (

@@ -47,7 +47,6 @@ const ConceptSection = () => {
             "
             onClick={() => {
               // 実際のクリック処理（将来的にルーターを追加予定）
-              console.log('Navigate to /concept');
               alert('コンセプト詳細ページに移動します（将来実装予定）');
             }}
           >
