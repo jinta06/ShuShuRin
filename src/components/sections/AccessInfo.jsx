@@ -1,36 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { 
   MapPinIcon, 
   ClockIcon, 
   ArrowRightIcon,
-  ChatBubbleLeftRightIcon,
-  PhoneIcon,
   CalendarDaysIcon 
 } from '@heroicons/react/24/outline';
-import { storeInfo, getBusinessHoursStatus } from '../../data/storeInfo';
+import { storeInfo } from '../../data/storeInfo';
 
 const AccessInfo = () => {
-  const [businessStatus, setBusinessStatus] = useState(null);
-
-  useEffect(() => {
-    // 営業時間ステータスを取得
-    setBusinessStatus(getBusinessHoursStatus());
-    
-    // 1分ごとにステータスを更新
-    const interval = setInterval(() => {
-      setBusinessStatus(getBusinessHoursStatus());
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleInstagramDM = () => {
-    window.open(storeInfo.contact.instagramDM, '_blank');
-  };
-
-  const handleInstagramProfile = () => {
-    window.open(storeInfo.contact.instagramUrl, '_blank');
-  };
 
   return (
     <section className="py-16 px-4 bg-white">
@@ -45,23 +22,7 @@ const AccessInfo = () => {
           </p>
         </div>
 
-        {/* 営業ステータス表示 */}
-        {businessStatus && (
-          <div className={`mb-8 p-4 rounded-2xl text-center ${
-            businessStatus.isOpen 
-              ? 'bg-green-50 border border-green-200' 
-              : 'bg-gray-50 border border-gray-200'
-          }`}>
-            <div className={`inline-flex items-center gap-2 text-sm font-medium ${
-              businessStatus.isOpen ? 'text-green-700' : 'text-gray-600'
-            }`}>
-              <ClockIcon className="w-4 h-4" />
-              {businessStatus.message}
-              {businessStatus.closeTime && ` (${businessStatus.closeTime})`}
-              {businessStatus.nextOpenTime && ` - ${businessStatus.nextOpenTime}`}
-            </div>
-          </div>
-        )}
+
 
         {/* 店舗基本情報 */}
         <div className="bg-brand-secondary rounded-2xl p-8 shadow-sm mb-8">
@@ -103,155 +64,99 @@ const AccessInfo = () => {
                 </div>
               </div>
             </div>
+
+            {/* 営業時間 */}
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center">
+                <CalendarDaysIcon className="w-6 h-6 text-brand-accent" />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-display font-medium text-brand-primary mb-2">
+                  営業時間
+                </h4>
+                <div className="space-y-3">
+                  <p className="text-sophisticated-500 text-sm">
+                    {storeInfo.businessHours.note}
+                  </p>
+                  <p className="text-brand-primary text-sm font-medium">
+                    {storeInfo.businessHours.instagramReference}
+                  </p>
+                  <a
+                    href={storeInfo.businessHours.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      inline-flex items-center justify-center
+                      bg-brand-accent text-white 
+                      px-4 py-2 rounded-full 
+                      font-display text-xs font-medium
+                      shadow-md hover:shadow-lg
+                      transform hover:scale-105 active:scale-95
+                      transition-all duration-200
+                      focus:ring-4 focus:ring-brand-accent/30
+                      focus:outline-none
+                      gap-2
+                    "
+                  >
+                    <CalendarDaysIcon className="w-3 h-3" />
+                    Instagramで確認
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* 駐車場 */}
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center">
+                <ArrowRightIcon className="w-6 h-6 text-brand-accent" />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-display font-medium text-brand-primary mb-2">
+                  駐車場
+                </h4>
+                <p className="text-sophisticated-500 text-sm">
+                  {storeInfo.accessibility.parking.note}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* 営業時間 */}
-        <div className="bg-brand-secondary rounded-2xl p-8 shadow-sm mb-8">
-          <div className="flex items-center justify-center mb-6">
-            <div className="flex-shrink-0 w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center mr-4">
-              <CalendarDaysIcon className="w-6 h-6 text-brand-accent" />
-            </div>
-            <h3 className="font-display text-xl font-medium text-brand-primary">
-              営業時間
-            </h3>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="flex justify-between items-center py-3 border-b border-sophisticated-100">
-              <span className="text-sophisticated-500 font-medium">平日</span>
-              <span className="font-display text-brand-primary">
-                {storeInfo.businessHours.weekday.display}
-              </span>
-            </div>
-            <div className="flex justify-between items-center py-3 border-b border-sophisticated-100">
-              <span className="text-sophisticated-500 font-medium">土日祝</span>
-              <span className="font-display text-brand-primary">
-                {storeInfo.businessHours.weekend.display}
-              </span>
-            </div>
-            <div className="flex justify-between items-center py-3">
-              <span className="text-sophisticated-500 font-medium">定休日</span>
-              <span className="font-display text-brand-primary">
-                {storeInfo.businessHours.closedDay}
-              </span>
-            </div>
-          </div>
-          
-          <div className="mt-6 p-4 bg-white/60 rounded-xl">
-            <p className="text-sophisticated-500 text-xs text-center">
-              {storeInfo.businessHours.note}
-            </p>
-          </div>
-        </div>
 
-        {/* お問い合わせ・相談案内 */}
-        <div className="bg-brand-secondary rounded-2xl p-8 shadow-sm">
+        {/* Google マップ */}
+        <div className="mt-8 bg-brand-secondary rounded-2xl p-6 shadow-sm">
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-accent/10 rounded-full mb-4">
-              <ChatBubbleLeftRightIcon className="w-8 h-8 text-brand-accent" />
+              <MapPinIcon className="w-8 h-8 text-brand-accent" />
             </div>
-            <h3 className="font-display text-xl font-medium text-brand-primary mb-3">
-              お問い合わせ・ご相談
+            <h3 className="font-display text-xl font-medium text-brand-primary mb-2">
+              アクセスマップ
             </h3>
-          </div>
-
-          <div className="mb-6">
-            <p className="text-sophisticated-500 text-sm leading-relaxed text-center mb-2">
-              {storeInfo.messages.consultation}
-            </p>
-            <p className="text-sophisticated-500 text-sm leading-relaxed text-center mb-4">
-              {storeInfo.messages.service}
-            </p>
-            <p className="text-brand-primary text-sm font-medium text-center">
-              {storeInfo.messages.contactMethod}
+            <p className="text-sophisticated-500 text-sm">
+              ShuShuRin の場所をマップでご確認いただけます
             </p>
           </div>
-
-          {/* アクションボタン群 */}
-          <div className="space-y-3">
-            <button 
-              className="
-                w-full bg-brand-accent text-white 
-                px-6 py-3 rounded-full 
-                font-display text-sm font-medium
-                shadow-lg hover:shadow-xl
-                transform hover:scale-105 active:scale-95
-                transition-all duration-200
-                focus:ring-4 focus:ring-brand-accent/30
-                focus:outline-none
-                inline-flex items-center justify-center gap-2
-              "
-              onClick={handleInstagramDM}
-            >
-              <ChatBubbleLeftRightIcon className="w-4 h-4" />
-              Instagram DM でご相談
-            </button>
-
-            <button 
-              className="
-                w-full px-6 py-3 rounded-full 
-                font-display text-sm font-medium
-                border-2 border-brand-accent text-brand-accent
-                bg-transparent hover:bg-brand-accent hover:text-white
-                shadow-sm hover:shadow-lg
-                transform hover:scale-105 active:scale-95
-                transition-all duration-200
-                focus:ring-4 focus:ring-brand-accent/30
-                focus:outline-none
-                inline-flex items-center justify-center gap-2
-              "
-              onClick={handleInstagramProfile}
-            >
-              <PhoneIcon className="w-4 h-4" />
-              来店予約・お問い合わせ
-            </button>
+          
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-sophisticated-100">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.9806830020175!2d135.55185607519692!3d34.50337399377591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000d72667b95529%3A0x4f3ed612d79a8d85!2sShu%20Shu%20Rin!5e0!3m2!1sja!2sjp!4v1756663302532!5m2!1sja!2sjp" 
+              width="100%" 
+              height="300" 
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="ShuShuRin 店舗地図"
+            />
           </div>
-
-          {/* Instagram情報 */}
-          <div className="mt-6 pt-6 border-t border-sophisticated-100 text-center">
-            <p className="text-sophisticated-500 text-xs">
-              Instagram: {storeInfo.contact.instagram}<br />
-              コーディネート相談・来店予約もお気軽に
+          
+          <div className="mt-4 text-center">
+            <p className="text-sophisticated-500 text-xs leading-relaxed">
+              南海高野線「大阪狭山市駅」から徒歩5分<br />
+              店舗近くに駐車場2台完備
             </p>
           </div>
         </div>
-
-        {/* 将来のGoogleマップ統合エリア */}
-        <div className="mt-8 p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-          <div className="text-center">
-            <MapPinIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-500 text-sm font-medium mb-2">
-              Google Maps 統合エリア
-            </p>
-            <p className="text-gray-400 text-xs">
-              将来的にインタラクティブな地図を表示予定
-            </p>
-          </div>
-        </div>
-
-        {/* アクセシビリティ情報 */}
-        {storeInfo.accessibility && (
-          <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
-            <h4 className="font-display font-medium text-blue-900 mb-2 text-sm">
-              アクセシビリティ
-            </h4>
-            <div className="text-blue-700 text-xs space-y-1">
-              {storeInfo.accessibility.wheelchairAccess && (
-                <p>• 車椅子でのアクセス可能</p>
-              )}
-              {storeInfo.accessibility.elevator && (
-                <p>• エレベーター完備</p>
-              )}
-              {storeInfo.accessibility.publicTransportAccess && (
-                <p>• 公共交通機関でのアクセス良好</p>
-              )}
-              {!storeInfo.accessibility.parkingAvailable && (
-                <p>• 専用駐車場なし（近隣コインパーキングをご利用ください）</p>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
