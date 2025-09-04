@@ -10,7 +10,7 @@ import { storeInfo } from '../../data/storeInfo';
 const AccessInfo = () => {
 
   return (
-    <section className="py-16 px-4 bg-white">
+    <section id="access" className="py-16 px-4 bg-white">
       <div className="max-w-lg mx-auto">
         {/* セクションヘッダー */}
         <div className="text-center mb-12">
