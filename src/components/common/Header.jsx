@@ -1,17 +1,108 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isInHero, setIsInHero] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // ナビゲーションクリック時の処理
+  const handleNavClick = (path) => {
+    setIsMenuOpen(false);
+    
+    // ページトップにスクロール（アクセス以外）
+    if (path !== '/#access') {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
+    }
+  };
+
+  // アクセスセクションへのスクロール
+  const handleAccessClick = (e) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    if (location.pathname === '/') {
+      // ホームページの場合はアクセスセクションにスクロール
+      setTimeout(() => {
+        const accessSection = document.getElementById('access');
+        if (accessSection) {
+          accessSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 100);
+    } else {
+      // 他のページの場合はホームページに移動してハッシュ付きで遷移
+      navigate('/#access');
+    }
+  };
+
+  // スクロール位置とヒーロー部分の監視
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const isHome = location.pathname === '/';
+      
+      // スクロール状態の更新
+      setIsScrolled(scrollY > 20);
+      
+      // ホームページのヒーロー部分にいるかどうかの判定
+      if (isHome) {
+        const heroHeight = window.innerHeight; // ヒーローセクションはh-screen
+        setIsInHero(scrollY < heroHeight - 100); // 100px手前で切り替え
+      } else {
+        setIsInHero(false);
+      }
+    };
+
+    // 初期状態の設定
+    handleScroll();
+    
+    // スクロールイベントリスナーの設定
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [location.pathname]);
+
+  // ページ変更時の状態リセット
+  useEffect(() => {
+    const isHome = location.pathname === '/';
+    setIsInHero(isHome && window.scrollY < window.innerHeight - 100);
+    
+    // URLにアクセスハッシュがある場合の処理
+    if (location.hash === '#access' && isHome) {
+      const timer = setTimeout(() => {
+        const accessSection = document.getElementById('access');
+        if (accessSection) {
+          accessSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname, location.hash]);
+
+  // テキストカラーの決定
+  const logoColor = isInHero ? 'white' : 'black';
+  const hamburgerColor = isInHero ? 'bg-white' : 'bg-brand-primary';
+
   return (
     <>
-      <header className="bg-brand-secondary shadow-sm relative z-40">
+      <header className="fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out bg-transparent">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* ShuShuRin Logo */}
@@ -19,7 +110,7 @@ const Header = () => {
               <Link to="/">
                 <Logo 
                   showText={true} 
-                  color="black" 
+                  color={logoColor} 
                   size="md" 
                   className="cursor-pointer"
                 />
@@ -29,22 +120,24 @@ const Header = () => {
             {/* Hamburger Menu Button */}
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-lg hover:bg-accent-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
+              className={`p-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-accent/30 ${
+                isInHero ? 'hover:bg-white/20' : 'hover:bg-accent-100'
+              }`}
               aria-label="メニューを開く"
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
-                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 ${
+                  className={`block w-6 h-0.5 transition-all duration-300 ${hamburgerColor} ${
                     isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
                   }`}
                 ></span>
                 <span
-                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 mt-1 ${
+                  className={`block w-6 h-0.5 transition-all duration-300 mt-1 ${hamburgerColor} ${
                     isMenuOpen ? 'opacity-0' : ''
                   }`}
                 ></span>
                 <span
-                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 mt-1 ${
+                  className={`block w-6 h-0.5 transition-all duration-300 mt-1 ${hamburgerColor} ${
                     isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
                   }`}
                 ></span>
@@ -87,45 +180,45 @@ const Header = () => {
           <div className="space-y-1">
             <Link
               to="/"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/')}
             >
-              ホーム
+              Home
             </Link>
             <Link
               to="/concept"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/concept')}
             >
-              コンセプト
+              Concept
             </Link>
             <Link
               to="/coordinate"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/coordinate')}
             >
-              コーディネート
+              Coordinate
             </Link>
             <Link
               to="/brand-story"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/brand-story')}
             >
-              ブランドストーリー
+              Brand Story
             </Link>
-            <Link
-              to="/#access"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+            <a
+              href="#access"
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={handleAccessClick}
             >
-              アクセス
-            </Link>
+              Access
+            </a>
             <Link
               to="/contact"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/contact')}
             >
-              お問い合わせ
+              Contact
             </Link>
           </div>
 
