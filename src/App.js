@@ -5,6 +5,9 @@ import Footer from './components/common/Footer';
 import Loading from './components/common/Loading';
 import Home from './pages/Home';
 import Concept from './pages/Concept';
+import Coordinate from './pages/Coordinate';
+import BrandStory from './pages/BrandStory';
+import Contact from './pages/Contact';
 import Button from './components/ui/Button';
 import Card from './components/ui/Card';
 import Modal from './components/ui/Modal';
@@ -26,6 +29,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/concept" element={<Concept />} />
+          <Route path="/coordinate" element={<Coordinate />} />
+          <Route path="/brand-story" element={<BrandStory />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
 
         {/* Testing UI Components - 開発時のみ表示（後で削除） */}
