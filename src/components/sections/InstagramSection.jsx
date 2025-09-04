@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HeartIcon, UserPlusIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, UserPlusIcon } from '@heroicons/react/24/outline';
 
 const InstagramSection = () => {
   // Instagram埋め込みスクリプトを動的に読み込み
@@ -17,10 +17,6 @@ const InstagramSection = () => {
       }
     };
   }, []);
-
-  const handleInstagramDM = () => {
-    window.open('https://www.instagram.com/direct/inbox/', '_blank');
-  };
 
   const handleInstagramProfile = () => {
     window.open('https://www.instagram.com/shu.shu.rin/', '_blank');
@@ -201,49 +197,17 @@ const InstagramSection = () => {
           </div>
         </div>
 
-        {/* コーディネート相談案内 */}
+        {/* フォローボタン */}
         <div className="bg-white rounded-2xl p-8 shadow-sm border border-sophisticated-100">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-accent/10 rounded-full mb-4">
-              <ChatBubbleLeftRightIcon className="w-8 h-8 text-brand-accent" />
-            </div>
-            <h3 className="font-display text-xl font-medium text-brand-primary mb-3">
-              お気軽にご相談ください
+          <div className="text-center">
+            <h3 className="font-display text-lg font-medium text-brand-primary mb-6">
+              最新情報をチェック
             </h3>
-            <p className="text-sophisticated-500 text-sm leading-relaxed mb-6">
-              「わたしに似合う服ってなんだろう？」<br />
-              そんなご相談もお気軽に。<br />
-              <br />
-              コーディネートのご相談、商品のご質問、来店予約など、<br />
-              どんなことでもInstagram DMでお声がけください。<br />
-              姉妹ふたりで、丁寧に対応させていただきます。
-            </p>
-          </div>
-
-          {/* アクションボタン群 */}
-          <div className="space-y-3">
-            <button 
-              className="
-                w-full bg-brand-accent text-white 
-                px-6 py-3 rounded-full 
-                font-display text-sm
-                shadow-lg hover:shadow-xl
-                transform hover:scale-105 active:scale-95
-                transition-all duration-200
-                focus:ring-4 focus:ring-brand-accent/30
-                focus:outline-none
-                inline-flex items-center justify-center gap-2
-              "
-              onClick={handleInstagramDM}
-            >
-              <ChatBubbleLeftRightIcon className="w-4 h-4" />
-              Instagram DM でご相談
-            </button>
-
+            
             <button 
               className="
                 w-full px-6 py-3 rounded-full 
-                font-display text-sm
+                font-display text-sm font-medium
                 border-2 border-brand-accent text-brand-accent
                 bg-transparent hover:bg-brand-accent hover:text-white
                 shadow-sm hover:shadow-lg
@@ -256,16 +220,16 @@ const InstagramSection = () => {
               onClick={handleInstagramProfile}
             >
               <HeartIcon className="w-4 h-4" />
-              フォローする
+              Instagram をフォローする
             </button>
-          </div>
-
-          {/* Instagram情報 */}
-          <div className="mt-6 pt-6 border-t border-sophisticated-100 text-center">
-            <p className="text-sophisticated-500 text-xs">
-              Instagram: @shu.shu.rin<br />
-              最新のスタイリング情報をお届けしています
-            </p>
+            
+            {/* Instagram情報 */}
+            <div className="mt-6 pt-6 border-t border-sophisticated-100">
+              <p className="text-sophisticated-500 text-xs">
+                Instagram: @shu.shu.rin<br />
+                最新のスタイリング情報をお届けしています
+              </p>
+            </div>
           </div>
         </div>
       </div>

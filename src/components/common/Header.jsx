@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
 const Header = () => {
@@ -15,12 +16,14 @@ const Header = () => {
           <div className="flex items-center justify-between">
             {/* ShuShuRin Logo */}
             <div className="flex items-center">
-              <Logo 
-                showText={true} 
-                color="black" 
-                size="md" 
-                className="cursor-pointer"
-              />
+              <Link to="/">
+                <Logo 
+                  showText={true} 
+                  color="black" 
+                  size="md" 
+                  className="cursor-pointer"
+                />
+              </Link>
             </div>
 
             {/* Hamburger Menu Button */}
@@ -82,48 +85,56 @@ const Header = () => {
 
           {/* Navigation Links */}
           <div className="space-y-1">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               ホーム
-            </a>
-            <a
-              href="/concept"
+            </Link>
+            <Link
+              to="/concept"
               className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
               onClick={toggleMenu}
             >
               コンセプト
-            </a>
-            <a
-              href="/coordinate"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+            </Link>
+            <button
+              className="block w-full text-left px-4 py-3 text-lg font-elegant font-medium text-sophisticated-400 hover:bg-accent-50 hover:text-sophisticated-500 rounded-lg transition-colors duration-200"
+              onClick={() => {
+                alert('コーディネートページは準備中です');
+                toggleMenu();
+              }}
             >
-              コーディネート
-            </a>
-            <a
-              href="/brand-story"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              コーディネート<span className="text-xs ml-2">(準備中)</span>
+            </button>
+            <button
+              className="block w-full text-left px-4 py-3 text-lg font-elegant font-medium text-sophisticated-400 hover:bg-accent-50 hover:text-sophisticated-500 rounded-lg transition-colors duration-200"
+              onClick={() => {
+                alert('ブランドストーリーページは準備中です');
+                toggleMenu();
+              }}
             >
-              ブランドストーリー
-            </a>
-            <a
-              href="/access"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              ブランドストーリー<span className="text-xs ml-2">(準備中)</span>
+            </button>
+            <button
+              className="block w-full text-left px-4 py-3 text-lg font-elegant font-medium text-sophisticated-400 hover:bg-accent-50 hover:text-sophisticated-500 rounded-lg transition-colors duration-200"
+              onClick={() => {
+                alert('アクセスページは準備中です');
+                toggleMenu();
+              }}
             >
-              アクセス
-            </a>
-            <a
-              href="/contact"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              アクセス<span className="text-xs ml-2">(準備中)</span>
+            </button>
+            <button
+              className="block w-full text-left px-4 py-3 text-lg font-elegant font-medium text-sophisticated-400 hover:bg-accent-50 hover:text-sophisticated-500 rounded-lg transition-colors duration-200"
+              onClick={() => {
+                alert('お問い合わせページは準備中です');
+                toggleMenu();
+              }}
             >
-              お問い合わせ
-            </a>
+              お問い合わせ<span className="text-xs ml-2">(準備中)</span>
+            </button>
           </div>
 
           {/* Instagram Link */}

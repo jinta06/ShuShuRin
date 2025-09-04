@@ -4,7 +4,6 @@ import { ChevronRightIcon } from '@heroicons/react/24/outline';
 const ConceptCard = ({ concept, index }) => {
   const handleCardClick = () => {
     // 実際のリンク処理（将来的にルーターを追加予定）
-    console.log(`Navigate to: ${concept.link}`);
     alert(`「${concept.title}」の詳細ページに移動します（将来実装予定）`);
   };
 
