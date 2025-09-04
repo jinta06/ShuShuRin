@@ -41,7 +41,7 @@ const Concept = () => {
       <section className="py-16 px-4 text-center">
         <div className="max-w-lg mx-auto">
           <h1 className="text-3xl font-display text-brand-primary mb-6 leading-relaxed">
-            3つのコンセプト
+            Concept
           </h1>
           <p className="text-sophisticated-500 text-sm leading-relaxed mb-8">
             ShuShuRinが大切にしている想いを<br />
