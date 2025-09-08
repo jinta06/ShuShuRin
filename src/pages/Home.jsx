@@ -8,6 +8,24 @@ const Home = () => {
   useEffect(() => {
     // ページタイトル設定
     document.title = 'ShuShuRin | 年齢を脱ぐ、冒険を着る';
+    
+    // URLのハッシュがある場合、該当セクションにスクロール（ヘッダー高さを考慮）
+    if (window.location.hash === '#access') {
+      setTimeout(() => {
+        const accessSection = document.getElementById('access');
+        if (accessSection) {
+          const elementPosition = accessSection.offsetTop;
+          
+          console.log('Access section offsetTop (Home.jsx):', accessSection.offsetTop);
+          console.log('Calculated scroll position (Home.jsx):', elementPosition);
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 600); // DOM要素が確実に準備されるよう少し長めの遅延
+    }
   }, []);
 
   return (
