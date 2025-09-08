@@ -30,142 +30,112 @@ export const coordinateCategories = [
 */
 export const coordinates = [
   {
-    id: 'casual-01',
+    id: 'coordinate-01',
+    category: 'elegant',
+    title: 'ドッキングワンピース',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_01.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_01.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-02',
+    category: 'elegant',
+    title: 'ドット×フリル×リボン',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_02.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_02.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-03',
+    category: 'elegant',
+    title: 'ジレベスト',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_03.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_03.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-04',
     category: 'casual',
-    title: 'リラックスカジュアル',
-    description: '自然体で心地よい、デイリーカジュアルスタイル',
-    imagePath: '/assets/images/coordinate/casual/coordinate-casual-01.webp',
-    imagePathJpg: '/assets/images/coordinate/casual/coordinate-casual-01.jpg',
+    title: '自然な魅力のカジュアルスタイル',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_04.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_04.jpg'),
     width: 1170,
     height: 1545
   },
   {
-    id: 'casual-02',
+    id: 'coordinate-05',
+    category: 'elegant',
+    title: 'ラグジュアリー スタイル',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_05.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_05.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-06',
+    category: 'elegant',
+    title: 'エターナル エレガント',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_06.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_06.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-07',
+    category: 'elegant',
+    title: 'サロペット',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_07.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_07.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-08',
+    category: 'elegant',
+    title: 'リファインド エレガント',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_08.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_08.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-09',
+    category: 'elegant',
+    title: 'ジャンスカ',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_09.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_09.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-10',
+    category: 'elegant',
+    title: 'アリストクラシー',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_10.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_10.jpg'),
+    width: 1170,
+    height: 1545
+  },
+  {
+    id: 'coordinate-11',
     category: 'casual',
-    title: 'モダンカジュアル',
-    description: '洗練された大人のカジュアルコーディネート',
-    imagePath: '/assets/images/coordinate/casual/coordinate-casual-02.webp',
-    imagePathJpg: '/assets/images/coordinate/casual/coordinate-casual-02.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'casual-03',
-    category: 'casual',
-    title: 'エフォートレスカジュアル',
-    description: '頑張りすぎない、自然な魅力のカジュアルスタイル',
-    imagePath: '/assets/images/coordinate/casual/coordinate-casual-03.webp',
-    imagePathJpg: '/assets/images/coordinate/casual/coordinate-casual-03.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'casual-04',
-    category: 'casual',
-    title: 'アーバンカジュアル',
-    description: '都会的でスマートなカジュアルコーディネート',
-    imagePath: '/assets/images/coordinate/casual/coordinate-casual-04.webp',
-    imagePathJpg: '/assets/images/coordinate/casual/coordinate-casual-04.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-01',
-    category: 'elegant',
-    title: 'クラシックエレガント',
-    description: '時代を超えて愛される、クラシカルなエレガンススタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-01.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-01.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-02',
-    category: 'elegant',
-    title: 'モダンエレガント',
-    description: '現代的な洗練とエレガンスが融合したスタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-02.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-02.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-03',
-    category: 'elegant',
-    title: 'ソフィスティケートエレガント', 
-    description: '知的で洗練された大人のエレガンススタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-03.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-03.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-04',
-    category: 'elegant',
-    title: 'フェミニンエレガント',
-    description: '女性らしさと上品さが調和したエレガントスタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-04.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-04.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-05',
-    category: 'elegant',
-    title: 'ラグジュアリーエレガント',
-    description: '高級感とエレガンスが織りなす特別なスタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-05.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-05.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-06',
-    category: 'elegant',
-    title: 'クラシックエレガント',
-    description: '時代を超えて愛される、クラシカルなエレガンススタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-01.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-01.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-07',
-    category: 'elegant',
-    title: 'モダンエレガント',
-    description: '現代的な洗練とエレガンスが融合したスタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-02.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-02.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-08',
-    category: 'elegant',
-    title: 'ソフィスティケートエレガント', 
-    description: '知的で洗練された大人のエレガンススタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-03.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-03.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-09',
-    category: 'elegant',
-    title: 'フェミニンエレガント',
-    description: '女性らしさと上品さが調和したエレガントスタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-04.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-04.jpg',
-    width: 1170,
-    height: 1545
-  },
-  {
-    id: 'elegant-10',
-    category: 'elegant',
-    title: 'ラグジュアリーエレガント',
-    description: '高級感とエレガンスが織りなす特別なスタイル',
-    imagePath: '/assets/images/coordinate/elegant/coordinate-elegant-05.webp',
-    imagePathJpg: '/assets/images/coordinate/elegant/coordinate-elegant-05.jpg',
+    title: 'スクエアカラーブラウス',
+    description: '　',
+    imagePath: require('../assets/images/coordinates/coordinate_11.webp'),
+    imagePathJpg: require('../assets/images/coordinates/coordinate_11.jpg'),
     width: 1170,
     height: 1545
   }
