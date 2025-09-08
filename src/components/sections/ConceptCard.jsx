@@ -1,10 +1,29 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 const ConceptCard = ({ concept, index }) => {
+  const navigate = useNavigate();
+
   const handleCardClick = () => {
-    // 実際のリンク処理（将来的にルーターを追加予定）
-    alert(`「${concept.title}」の詳細ページに移動します（将来実装予定）`);
+    // 該当コンセプトのハッシュリンクに遷移
+    const hash = concept.link.split('#')[1];
+    navigate(`/concept#${hash}`);
+    
+    // ページ遷移後に該当セクションにスクロール（ヘッダー高さを考慮）
+    setTimeout(() => {
+      const element = document.querySelector(`#${hash}`);
+      if (element) {
+        const headerHeight = 80; // pt-20 = 80px
+        const additionalOffset = 20; // 追加の余白
+        const elementPosition = element.offsetTop - headerHeight - additionalOffset;
+        
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   return (

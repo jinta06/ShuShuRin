@@ -1,8 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ConceptCard from './ConceptCard';
 import { concepts } from '../../data/concepts';
 
 const ConceptSection = () => {
+  const navigate = useNavigate();
+
+  const handleConceptDetailClick = () => {
+    navigate('/concept');
+    // ページトップにスクロール
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+  };
+
   return (
     <section className="py-16 px-6 bg-brand-secondary">
       <div className="max-w-lg mx-auto">
@@ -45,10 +56,7 @@ const ConceptSection = () => {
               focus:ring-4 focus:ring-brand-accent/30
               focus:outline-none
             "
-            onClick={() => {
-              // 実際のクリック処理（将来的にルーターを追加予定）
-              alert('コンセプト詳細ページに移動します（将来実装予定）');
-            }}
+            onClick={handleConceptDetailClick}
           >
             コンセプトを詳しく見る
           </button>

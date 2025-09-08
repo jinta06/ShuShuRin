@@ -192,46 +192,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* 最終CTAセクション */}
-      <section className="py-12 bg-gradient-to-br from-accent-50 to-sophisticated-50">
-        <div className="max-w-lg mx-auto px-4 text-center">
-          <div className="bg-white rounded-3xl p-6 shadow-lg">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-accent/10 rounded-full mb-4">
-              <HeartIcon className="w-8 h-8 text-brand-accent" />
-            </div>
-            
-            <h3 className="text-xl font-display text-brand-primary mb-4">
-              お待ちしております
-            </h3>
-            
-            <p className="text-sophisticated-500 text-sm leading-relaxed mb-6">
-              あなたらしい特別な一着との出会いを<br />
-              姉妹ふたりでお手伝いさせていただきます
-            </p>
-            
-            <a
-              href="https://instagram.com/shushurin_select"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                w-full bg-brand-accent text-white 
-                px-8 py-3 rounded-full 
-                font-display text-sm font-medium
-                shadow-lg hover:shadow-xl
-                transform hover:scale-105 active:scale-95
-                transition-all duration-200
-                focus:ring-4 focus:ring-brand-accent/30
-                focus:outline-none
-                inline-flex items-center justify-center gap-2
-              "
-              style={{ minHeight: '44px' }}
-            >
-              <HeartIcon className="w-4 h-4" />
-              Instagram DMで話しかける
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
   );
 };

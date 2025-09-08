@@ -1,18 +1,28 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { HeartIcon, SparklesIcon, StarIcon } from '@heroicons/react/24/outline';
 import { concepts } from '../data/concepts';
 
 const Concept = () => {
+  const navigate = useNavigate();
+  
   useEffect(() => {
     // ページタイトル設定
     document.title = 'コンセプト | ShuShuRin';
     
-    // URLのハッシュがある場合、該当セクションにスクロール
+    // URLのハッシュがある場合、該当セクションにスクロール（ヘッダー高さを考慮）
     if (window.location.hash) {
       const element = document.querySelector(window.location.hash);
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const headerHeight = 80; // pt-20 = 80px
+          const additionalOffset = 20; // 追加の余白
+          const elementPosition = element.offsetTop - headerHeight - additionalOffset;
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
         }, 100);
       }
     }
@@ -32,7 +42,11 @@ const Concept = () => {
   };
 
   const handleCoordinateNavigation = () => {
-    window.location.href = '/coordinate';
+    navigate('/coordinate');
+    // ページトップにスクロール
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
   };
 
   return (
@@ -132,15 +146,6 @@ const Concept = () => {
               コーディネートを見る
             </button>
           </div>
-        </div>
-      </section>
-
-      {/* ページ下部の装飾 */}
-      <section className="py-8 px-4">
-        <div className="max-w-lg mx-auto text-center">
-          <p className="text-sophisticated-400 text-xs italic">
-            あなたらしい特別な一着との出会いを
-          </p>
         </div>
       </section>
     </main>

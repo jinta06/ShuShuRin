@@ -41,7 +41,8 @@ const AccessInfo = () => {
                   住所
                 </h4>
                 <address className="text-sophisticated-500 text-sm leading-relaxed not-italic">
-                  {storeInfo.address.full}
+                  {storeInfo.address.postal}<br />
+                  {storeInfo.address.prefecture}{storeInfo.address.city}{storeInfo.address.area}
                 </address>
               </div>
             </div>
