@@ -1,47 +1,168 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isInHero, setIsInHero] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // ナビゲーションクリック時の処理
+  const handleNavClick = (path) => {
+    setIsMenuOpen(false);
+    
+    // ページトップにスクロール（アクセス以外）
+    if (path !== '/#access') {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
+    }
+  };
+
+  // アクセスセクションへのスクロール
+  const handleAccessClick = (e) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    if (location.pathname === '/') {
+      // ホームページの場合はアクセスセクションにスクロール（ヘッダー高さ考慮）
+      setTimeout(() => {
+        const accessSection = document.getElementById('access');
+        if (accessSection) {
+          const elementPosition = accessSection.offsetTop;
+          
+          console.log('Access section offsetTop:', accessSection.offsetTop);
+          console.log('Calculated scroll position:', elementPosition);
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    } else {
+      // 他のページの場合はホームページに移動
+      navigate('/');
+      // 移動後にスクロール処理
+      setTimeout(() => {
+        const accessSection = document.getElementById('access');
+        if (accessSection) {
+          const elementPosition = accessSection.offsetTop;
+          
+          console.log('Access section offsetTop (after navigation):', accessSection.offsetTop);
+          console.log('Calculated scroll position (after navigation):', elementPosition);
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 1000); // ページ遷移後なので長めの遅延
+    }
+  };
+
+  // スクロール位置とヒーロー部分の監視
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const isHome = location.pathname === '/';
+      
+      // スクロール状態の更新
+      setIsScrolled(scrollY > 20);
+      
+      // ホームページのヒーロー部分にいるかどうかの判定
+      if (isHome) {
+        const heroHeight = window.innerHeight; // ヒーローセクションはh-screen
+        setIsInHero(scrollY < heroHeight - 100); // 100px手前で切り替え
+      } else {
+        setIsInHero(false);
+      }
+    };
+
+    // 初期状態の設定
+    handleScroll();
+    
+    // スクロールイベントリスナーの設定
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [location.pathname]);
+
+  // ページ変更時の状態リセット
+  useEffect(() => {
+    const isHome = location.pathname === '/';
+    setIsInHero(isHome && window.scrollY < window.innerHeight - 100);
+    
+    // URLにアクセスハッシュがある場合の処理
+    if (location.hash === '#access' && isHome) {
+      const timer = setTimeout(() => {
+        const accessSection = document.getElementById('access');
+        if (accessSection) {
+          const elementPosition = accessSection.offsetTop;
+          
+          console.log('Access section offsetTop (useEffect):', accessSection.offsetTop);
+          console.log('Calculated scroll position (useEffect):', elementPosition);
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 500); // DOM要素が確実に準備されるよう少し遅延
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname, location.hash]);
+
+  // テキストカラーの決定
+  const logoColor = isInHero ? 'white' : 'black';
+  const hamburgerColor = isInHero ? 'bg-white' : 'bg-brand-primary';
+
   return (
     <>
-      <header className="bg-brand-secondary shadow-sm relative z-40">
+      <header className="fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out bg-transparent">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* ShuShuRin Logo */}
             <div className="flex items-center">
-              <Logo 
-                showText={true} 
-                color="black" 
-                size="md" 
-                className="cursor-pointer"
-              />
+              <Link to="/">
+                <Logo 
+                  showText={true} 
+                  color={logoColor} 
+                  size="md" 
+                  className="cursor-pointer"
+                />
+              </Link>
             </div>
 
             {/* Hamburger Menu Button */}
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-lg hover:bg-accent-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
+              className={`p-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-accent/30 ${
+                isInHero ? 'hover:bg-white/20' : 'hover:bg-accent-100'
+              }`}
               aria-label="メニューを開く"
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
-                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 ${
+                  className={`block w-6 h-0.5 transition-all duration-300 ${hamburgerColor} ${
                     isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
                   }`}
                 ></span>
                 <span
-                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 mt-1 ${
+                  className={`block w-6 h-0.5 transition-all duration-300 mt-1 ${hamburgerColor} ${
                     isMenuOpen ? 'opacity-0' : ''
                   }`}
                 ></span>
                 <span
-                  className={`block w-6 h-0.5 bg-brand-primary transition-all duration-300 mt-1 ${
+                  className={`block w-6 h-0.5 transition-all duration-300 mt-1 ${hamburgerColor} ${
                     isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
                   }`}
                 ></span>
@@ -82,48 +203,48 @@ const Header = () => {
 
           {/* Navigation Links */}
           <div className="space-y-1">
-            <a
-              href="/"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+            <Link
+              to="/"
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/')}
             >
-              ホーム
-            </a>
-            <a
-              href="/concept"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              Home
+            </Link>
+            <Link
+              to="/concept"
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/concept')}
             >
-              コンセプト
-            </a>
-            <a
-              href="/coordinate"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              Concept
+            </Link>
+            <Link
+              to="/coordinate"
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/coordinate')}
             >
-              コーディネート
-            </a>
-            <a
-              href="/brand-story"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              Coordinate
+            </Link>
+            <Link
+              to="/brand-story"
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/brand-story')}
             >
-              ブランドストーリー
-            </a>
+              Brand Story
+            </Link>
             <a
-              href="/access"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+              href="#access"
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={handleAccessClick}
             >
-              アクセス
+              Access
             </a>
-            <a
-              href="/contact"
-              className="block px-4 py-3 text-lg font-elegant font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
-              onClick={toggleMenu}
+            <Link
+              to="/contact"
+              className="block px-4 py-3 text-lg font-display font-medium text-brand-primary hover:bg-accent-50 hover:text-brand-accent rounded-lg transition-colors duration-200"
+              onClick={() => handleNavClick('/contact')}
             >
-              お問い合わせ
-            </a>
+              Contact
+            </Link>
           </div>
 
           {/* Instagram Link */}
