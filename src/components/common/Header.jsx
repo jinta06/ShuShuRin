@@ -31,19 +31,39 @@ const Header = () => {
     setIsMenuOpen(false);
     
     if (location.pathname === '/') {
-      // ホームページの場合はアクセスセクションにスクロール
+      // ホームページの場合はアクセスセクションにスクロール（ヘッダー高さ考慮）
       setTimeout(() => {
         const accessSection = document.getElementById('access');
         if (accessSection) {
-          accessSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
+          const elementPosition = accessSection.offsetTop;
+          
+          console.log('Access section offsetTop:', accessSection.offsetTop);
+          console.log('Calculated scroll position:', elementPosition);
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
           });
         }
       }, 100);
     } else {
-      // 他のページの場合はホームページに移動してハッシュ付きで遷移
-      navigate('/#access');
+      // 他のページの場合はホームページに移動
+      navigate('/');
+      // 移動後にスクロール処理
+      setTimeout(() => {
+        const accessSection = document.getElementById('access');
+        if (accessSection) {
+          const elementPosition = accessSection.offsetTop;
+          
+          console.log('Access section offsetTop (after navigation):', accessSection.offsetTop);
+          console.log('Calculated scroll position (after navigation):', elementPosition);
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 1000); // ページ遷移後なので長めの遅延
     }
   };
 
@@ -86,12 +106,17 @@ const Header = () => {
       const timer = setTimeout(() => {
         const accessSection = document.getElementById('access');
         if (accessSection) {
-          accessSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
+          const elementPosition = accessSection.offsetTop;
+          
+          console.log('Access section offsetTop (useEffect):', accessSection.offsetTop);
+          console.log('Calculated scroll position (useEffect):', elementPosition);
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
           });
         }
-      }, 100);
+      }, 500); // DOM要素が確実に準備されるよう少し遅延
       return () => clearTimeout(timer);
     }
   }, [location.pathname, location.hash]);

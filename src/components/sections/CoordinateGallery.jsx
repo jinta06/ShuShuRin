@@ -87,7 +87,7 @@ const CoordinateGallery = () => {
                   - 通常: 1列幅（grid-cols-2の1つ分）
                   - 大きい: 2列幅（col-span-2で全幅）
                 */}
-                <div className="relative group">
+                <div className="relative">
                   {/* メイン画像 */}
                   <div className="relative overflow-hidden">
                     <picture>
@@ -95,7 +95,7 @@ const CoordinateGallery = () => {
                       <img
                         src={coordinate.imagePathJpg}
                         alt={`${coordinate.title || `coordinate ${index + 1}`}`}
-                        className="w-full h-auto object-cover group-active:scale-95 transition-transform duration-200"
+                        className="w-full h-auto object-cover"
                         style={{ 
                           aspectRatio: getAspectRatio(coordinate, isLarge)
                         }}
