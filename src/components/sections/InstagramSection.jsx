@@ -1,22 +1,76 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { HeartIcon, UserPlusIcon } from '@heroicons/react/24/outline';
 
 const InstagramSection = () => {
+  const embedRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   // Instagram埋め込みスクリプトを動的に読み込み
   useEffect(() => {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = '//www.instagram.com/embed.js';
-    document.body.appendChild(script);
+    let script = null;
+    
+    // 既存のスクリプトをチェック
+    const existingScript = document.querySelector('script[src*="instagram.com/embed.js"]');
+    
+    if (!existingScript) {
+      // スクリプトがまだ読み込まれていない場合のみ追加
+      script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.instagram.com/embed.js';
+      script.onload = () => {
+        setIsLoaded(true);
+        processInstagramEmbeds();
+      };
+      script.onerror = () => {
+        console.warn('Instagram embed script failed to load');
+      };
+      document.body.appendChild(script);
+    } else {
+      // スクリプトが既に存在する場合、すぐに処理
+      setIsLoaded(true);
+      setTimeout(() => {
+        processInstagramEmbeds();
+      }, 100);
+    }
 
     return () => {
-      // クリーンアップ
-      const existingScript = document.querySelector('script[src="//www.instagram.com/embed.js"]');
-      if (existingScript) {
-        document.body.removeChild(existingScript);
-      }
+      // クリーンアップは行わない（他のコンポーネントでも使用される可能性があるため）
     };
   }, []);
+
+  // Instagram埋め込み要素を処理
+  const processInstagramEmbeds = () => {
+    if (window.instgrm && window.instgrm.Embeds) {
+      try {
+        window.instgrm.Embeds.process();
+      } catch (error) {
+        console.warn('Instagram embed processing failed:', error);
+      }
+    } else {
+      // Instagram APIがまだ利用できない場合、少し待ってから再試行
+      setTimeout(() => {
+        if (window.instgrm && window.instgrm.Embeds) {
+          try {
+            window.instgrm.Embeds.process();
+          } catch (error) {
+            console.warn('Instagram embed processing failed on retry:', error);
+          }
+        }
+      }, 500);
+    }
+  };
+
+  // DOM要素が準備できた後にInstagram埋め込みを処理
+  useEffect(() => {
+    if (isLoaded && embedRef.current) {
+      // 少し遅延を入れてからInstagram埋め込みを処理
+      const timer = setTimeout(() => {
+        processInstagramEmbeds();
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoaded]);
 
   const handleInstagramProfile = () => {
     window.open('https://www.instagram.com/shu.shu.rin/', '_blank');
@@ -45,7 +99,8 @@ const InstagramSection = () => {
             
             {/* Instagram投稿埋め込み - コンパクトバージョン */}
             <div className="instagram-embed-container mb-6 flex justify-center">
-              <blockquote 
+              <blockquote
+                ref={embedRef} 
                 className="instagram-media mx-auto" 
                 // data-instgrm-captioned 
                 data-instgrm-permalink="https://www.instagram.com/p/DNqDG_dT2YL/?utm_source=ig_embed&utm_campaign=loading" 
