@@ -38,33 +38,33 @@ const InstagramSection = () => {
 
         {/* Instagram投稿埋め込みエリア */}
         <div className="mb-12">
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-sophisticated-100">
+          <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-sophisticated-100">
             <h3 className="font-display font-medium text-brand-primary mb-6 text-center">
-              Latest Look
+              Pick Up
             </h3>
             
-            {/* Instagram投稿埋め込み - 実際の投稿URLに変更予定 */}
-            <div className="instagram-embed-container mb-6">
+            {/* Instagram投稿埋め込み - コンパクトバージョン */}
+            <div className="instagram-embed-container mb-6 flex justify-center">
               <blockquote 
-                className="instagram-media" 
-                data-instgrm-captioned 
-                data-instgrm-permalink="https://www.instagram.com/p/DN8vF2xksgj/?utm_source=ig_embed&utm_campaign=loading" 
+                className="instagram-media mx-auto" 
+                // data-instgrm-captioned 
+                data-instgrm-permalink="https://www.instagram.com/p/DNqDG_dT2YL/?utm_source=ig_embed&utm_campaign=loading" 
                 data-instgrm-version="14" 
                 style={{
                   background: '#FFF',
                   border: 0,
                   borderRadius: '3px',
                   boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)',
-                  margin: '1px',
-                  maxWidth: '540px',
-                  minWidth: '326px',
+                  margin: '1px auto',
+                  maxWidth: '400px',
+                  minWidth: '300px',
                   padding: 0,
-                  width: '99.375%'
+                  width: '100%'
                 }}
               >
                 <div style={{ padding: '16px' }}>
                   <a 
-                    href="https://www.instagram.com/p/DN8vF2xksgj/?utm_source=ig_embed&utm_campaign=loading" 
+                    href="https://www.instagram.com/p/DNqDG_dT2YL/?utm_source=ig_embed&utm_campaign=loading" 
                     style={{
                       background: '#FFFFFF',
                       lineHeight: 0,
@@ -108,14 +108,14 @@ const InstagramSection = () => {
                         }}></div>
                       </div>
                     </div>
-                    <div style={{ padding: '19% 0' }}></div>
+                    <div style={{ padding: '15% 0' }}></div>
                     <div style={{
                       display: 'block',
                       height: '50px',
                       margin: '0 auto 12px',
                       width: '50px'
                     }}>
-                      <svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1">
+                      <svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                           <g transform="translate(-511.000000, -20.000000)" fill="#000000">
                             <g>
@@ -137,38 +137,8 @@ const InstagramSection = () => {
                         この投稿をInstagramで見る
                       </div>
                     </div>
-                    <div style={{ padding: '12.5% 0' }}></div>
+                    <div style={{ padding: '4% 0' }}></div>
                   </a>
-                  <p style={{
-                    color: '#c9c8cd',
-                    fontFamily: 'Arial,sans-serif',
-                    fontSize: '14px',
-                    lineHeight: '17px',
-                    marginBottom: 0,
-                    marginTop: '8px',
-                    overflow: 'hidden',
-                    padding: '8px 0 7px',
-                    textAlign: 'center',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap'
-                  }}>
-                    <a 
-                      href="https://www.instagram.com/p/DN8vF2xksgj/?utm_source=ig_embed&utm_campaign=loading" 
-                      style={{
-                        color: '#c9c8cd',
-                        fontFamily: 'Arial,sans-serif',
-                        fontSize: '14px',
-                        fontStyle: 'normal',
-                        fontWeight: 'normal',
-                        lineHeight: '17px',
-                        textDecoration: 'none'
-                      }}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      鈴木(@rentailingmu)がシェアした投稿
-                    </a>
-                  </p>
                 </div>
               </blockquote>
             </div>

@@ -1,190 +1,146 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { coordinates, coordinateCategories } from '../../data/coordinates';
-import Modal from '../ui/Modal';
 
 const CoordinateGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // カテゴリ別フィルタリング
+  // カジュアルときれいめ（エレガント）のみ表示するカテゴリ
+  const filteredCategories = [
+    { id: 'all', name: 'All', color: 'text-brand-primary' },
+    { id: 'casual', name: 'Casual', color: 'text-accent-500' },
+    { id: 'elegant', name: 'Elegant', color: 'text-sophisticated-500' }
+  ];
+
+  // カテゴリ別フィルタリング（季節カテゴリを除外）
+  const availableCoordinates = coordinates.filter(coord => 
+    coord.category === 'casual' || coord.category === 'elegant'
+  );
+  
   const filteredCoordinates = selectedCategory === 'all' 
-    ? coordinates 
-    : coordinates.filter(coord => coord.category === selectedCategory);
+    ? availableCoordinates 
+    : availableCoordinates.filter(coord => coord.category === selectedCategory);
 
-  // 画像クリック時のモーダル表示
-  const handleImageClick = useCallback((coordinate) => {
-    setSelectedImage(coordinate);
-    setIsModalOpen(true);
-  }, []);
 
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
-    setSelectedImage(null);
-  }, []);
+  // アイテムが大きい画像かどうかを判定（7番目、15番目、23番目...）
+  const isLargeItem = (index) => {
+    return (index + 1) % 7 === 0;
+  };
+
+  // 画像の適切なアスペクト比を計算（width/heightから）
+  const getAspectRatio = (coordinate, isLarge) => {
+    // 大きい画像も通常画像も同じ縦長比率を維持
+    if (coordinate.width && coordinate.height) {
+      return `${coordinate.width}/${coordinate.height}`;
+    }
+    return '3/4'; // デフォルト（縦長）
+  };
 
   return (
-    <div className="max-w-md mx-auto px-4">
-      {/* カテゴリフィルター - スマホ専用デザイン */}
-      <div className="mb-8">
-        <div className="flex flex-wrap justify-center gap-2">
-          {coordinateCategories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedCategory === category.id
-                  ? 'bg-brand-primary text-white shadow-lg'
-                  : 'bg-white text-sophisticated-500 active:bg-accent-50 active:text-brand-primary shadow-md'
-              }`}
-              style={{ minHeight: '44px' }} // タッチターゲット最小サイズ
-            >
-              {category.name}
-            </button>
-          ))}
+    <div className="w-full">
+      {/* スマホ幅制限を適用 - 他のページと同じmax-w-lg */}
+      <div className="max-w-lg mx-auto px-4">
+        {/* カテゴリフィルター - ミニマルなアパレルスタイル */}
+        <div className="mb-12">
+          <div className="flex justify-center items-center">
+            <div className="flex gap-8">
+              {filteredCategories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`relative font-display text-sm tracking-wider uppercase transition-all duration-300 ${
+                    selectedCategory === category.id
+                      ? 'text-brand-primary'
+                      : 'text-sophisticated-400 hover:text-brand-primary'
+                  }`}
+                >
+                  {category.name}
+                  {/* アンダーライン */}
+                  <div className={`absolute -bottom-2 left-0 h-0.5 bg-brand-accent transition-all duration-300 ${
+                    selectedCategory === category.id ? 'w-full' : 'w-0'
+                  }`} />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* スマホ専用ギャラリーレイアウト */}
-      <div className="space-y-6">
-        {filteredCoordinates.map((coordinate, index) => (
-          <div
-            key={coordinate.id}
-            className="group cursor-pointer active:scale-95 transition-transform duration-200"
-            onClick={() => handleImageClick(coordinate)}
-          >
-            {/* スマホ専用エレガントカード */}
-            <div className="bg-white rounded-3xl shadow-lg active:shadow-xl transition-all duration-300 overflow-hidden">
-              {/* 画像 */}
-              <div className="relative overflow-hidden">
-                <picture>
-                  <source srcSet={coordinate.imagePath} type="image/webp" />
-                  <img
-                    src={coordinate.imagePathJpg}
-                    alt={coordinate.title}
-                    className="w-full h-auto object-cover"
-                    style={{ aspectRatio: '3/4' }} // 縦長の3:4比率
-                    loading="lazy"
-                  />
-                </picture>
-
-                {/* エレガントな拡大アイコン */}
-                <div className="absolute top-4 right-4">
-                  <div className="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md">
-                    <svg className="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
+        {/* メインギャラリー - ファッション風変則グリッドレイアウト */}
+        <div>
+        {/* 
+          変則グリッドパターン（スマホ幅制限 max-w-lg 適用）:
+          - 6枚（2列×3行）の後に1枚の大きい画像
+          - パターン: 2列, 2列, 2列, 1列（大）, 2列, 2列, 2列, 1列（大）...
+          - 大きい画像: 7番目、15番目、23番目...（7で割り切れる番号）
+          - 大きい画像も縦長アスペクト比を維持（横長にはならない）
+        */}
+        <div className="grid grid-cols-2 gap-2">
+          {filteredCoordinates.map((coordinate, index) => {
+            const isLarge = isLargeItem(index);
+            
+            return (
+              <div 
+                key={coordinate.id}
+                className={`${isLarge ? 'col-span-2' : ''}`}
+              >
+                {/* 
+                  画像アイテム:
+                  - 通常: 1列幅（grid-cols-2の1つ分）
+                  - 大きい: 2列幅（col-span-2で全幅）
+                */}
+                <div className="relative group">
+                  {/* メイン画像 */}
+                  <div className="relative overflow-hidden">
+                    <picture>
+                      <source srcSet={coordinate.imagePath} type="image/webp" />
+                      <img
+                        src={coordinate.imagePathJpg}
+                        alt={`${coordinate.title || `coordinate ${index + 1}`}`}
+                        className="w-full h-auto object-cover group-active:scale-95 transition-transform duration-200"
+                        style={{ 
+                          aspectRatio: getAspectRatio(coordinate, isLarge)
+                        }}
+                        loading="lazy"
+                      />
+                    </picture>
                   </div>
                 </div>
 
-                {/* カテゴリバッジ */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-sophisticated-500 rounded-full text-xs font-medium shadow-sm">
-                    {coordinate.categoryName}
-                  </span>
+                {/* タイトルと説明 - 写真外の左上に配置 */}
+                <div className="mt-1 space-y-0.5">
+                  {coordinate.title && (
+                    <div className="text-xs font-display tracking-wide text-brand-primary font-medium">
+                      {coordinate.title}
+                    </div>
+                  )}
+                  {coordinate.description && (
+                    <div className="text-xs text-sophisticated-400 leading-relaxed">
+                      {coordinate.description}
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {/* カード情報セクション */}
-              <div className="p-6">
-                <h3 className="text-xl font-display font-medium text-brand-primary mb-2">
-                  {coordinate.title}
-                </h3>
-                <p className="text-sophisticated-500 text-sm leading-relaxed mb-4">
-                  {coordinate.description}
-                </p>
-                
-                {/* タグ表示 */}
-                <div className="flex flex-wrap gap-2">
-                  {coordinate.tags.slice(0, 3).map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-2 py-1 bg-accent-50 text-accent-500 rounded text-xs"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
       </div>
 
-      {/* 空の状態 - スマホ専用 */}
-      {filteredCoordinates.length === 0 && (
-        <div className="text-center py-12">
-          <div className="w-20 h-20 mx-auto mb-4 bg-sophisticated-100 rounded-full flex items-center justify-center">
-            <svg className="w-10 h-10 text-sophisticated-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h3 className="text-lg font-display text-sophisticated-500 mb-2">
-            コーディネートが見つかりません
-          </h3>
-          <p className="text-sm text-sophisticated-400">
-            別のカテゴリをお試しください
-          </p>
-        </div>
-      )}
-
-      {/* スマホ専用画像モーダル */}
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {selectedImage && (
-          <div className="max-w-sm mx-auto">
-            {/* モーダル内画像 */}
-            <div className="relative mb-6">
-              <picture>
-                <source srcSet={selectedImage.imagePath} type="image/webp" />
-                <img
-                  src={selectedImage.imagePathJpg}
-                  alt={selectedImage.title}
-                  className="w-full h-auto object-contain rounded-2xl"
-                  style={{ aspectRatio: '3/4', maxHeight: '60vh' }}
-                />
-              </picture>
-              
-              {/* 閉じるボタン */}
-              <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 w-12 h-12 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white active:bg-black/80 transition-colors"
-                style={{ minHeight: '44px', minWidth: '44px' }} // タッチターゲット最小サイズ
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+        {/* 空の状態 */}
+        {filteredCoordinates.length === 0 && (
+          <div className="text-center py-20">
+            <div className="w-16 h-16 mx-auto mb-6 bg-sophisticated-100 rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-sophisticated-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
             </div>
-
-            {/* モーダル内情報 */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="px-3 py-1 bg-accent-50 text-accent-500 rounded-full text-sm font-medium">
-                  {selectedImage.categoryName}
-                </span>
-              </div>
-              <h2 className="text-xl font-display font-medium text-brand-primary mb-3">
-                {selectedImage.title}
-              </h2>
-              <p className="text-sophisticated-500 leading-relaxed text-sm mb-4">
-                {selectedImage.description}
-              </p>
-              
-              {/* タグ表示 */}
-              <div className="flex flex-wrap justify-center gap-2">
-                {selectedImage.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 bg-sophisticated-50 text-sophisticated-500 rounded text-xs"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <h3 className="text-lg font-display text-sophisticated-400 mb-2 tracking-wide">
+              No coordinates found
+            </h3>
+            <p className="text-sm text-sophisticated-300">
+              Try selecting a different category
+            </p>
           </div>
         )}
-      </Modal>
+      </div>
     </div>
   );
 };
