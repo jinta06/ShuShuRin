@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { coordinates, coordinateCategories } from '../../data/coordinates';
+import { coordinates } from '../../data/coordinates';
 
 const CoordinateGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -11,7 +11,7 @@ const CoordinateGallery = () => {
     { id: 'elegant', name: 'Elegant', color: 'text-sophisticated-500' }
   ];
 
-  // カテゴリ別フィルタリング（季節カテゴリを除外）
+  // カテゴリ別フィルタリング
   const availableCoordinates = coordinates.filter(coord => 
     coord.category === 'casual' || coord.category === 'elegant'
   );
