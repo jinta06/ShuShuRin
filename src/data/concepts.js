@@ -1,4 +1,4 @@
-// ShuShuRin 3つのコンセプトデータ
+// Shu Shu Rin 3つのコンセプトデータ
 
 export const concepts = [
   {

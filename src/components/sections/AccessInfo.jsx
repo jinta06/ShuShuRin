@@ -134,7 +134,7 @@ const AccessInfo = () => {
               アクセスマップ
             </h3>
             <p className="text-sophisticated-500 text-sm">
-              ShuShuRin の場所をマップでご確認いただけます
+              Shu Shu Rin の場所をマップでご確認いただけます
             </p>
           </div>
           
@@ -147,7 +147,7 @@ const AccessInfo = () => {
               allowFullScreen
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="ShuShuRin 店舗地図"
+              title="Shu Shu Rin 店舗地図"
             />
           </div>
           
