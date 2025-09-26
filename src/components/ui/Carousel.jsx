@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 /**
- * ShuShuRin カルーセルコンポーネント
+ * Shu Shu Rin カルーセルコンポーネント
  * 
  * @param {Array} items - 表示アイテムの配列
  * @param {boolean} autoPlay - 自動再生

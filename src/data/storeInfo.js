@@ -1,9 +1,9 @@
-// ShuShuRin 店舗情報データ
+// Shu Shu Rin 店舗情報データ
 // ブランドルール: apparel-brand-site-rules.md に準拠
 
 export const storeInfo = {
   // 基本情報
-  name: 'ShuShuRin',
+  name: 'Shu Shu Rin',
   concept: '年齢を脱ぐ、冒険を着る',
   type: '姉妹で営む小さなセレクトショップ',
   
@@ -60,7 +60,7 @@ export const storeInfo = {
       lng: 139.6503
     },
     zoom: 16,
-    placeId: 'ShuShuRin_placeholder' // 実際のPlace IDに変更予定
+    placeId: 'Shu_Shu_Rin_placeholder' // 実際のPlace IDに変更予定
   },
   
   // 特別なメッセージ

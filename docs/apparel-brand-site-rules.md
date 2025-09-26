@@ -1,8 +1,8 @@
-# ShuShuRin - アパレルセレクトショップサイト作成ルール & ガイドライン
+# Shu Shu Rin - アパレルセレクトショップサイト作成ルール & ガイドライン
 
 ## プロジェクト概要
 
-**店名**: ShuShuRin（シュシュリン）  
+**店名**: Shu Shu Rin（シュシュリン）  
 **コンセプト**: 「年齢を脱ぐ、冒険を着る」  
 **業態**: 姉妹で営む小さなセレクトショップ
 
@@ -305,7 +305,7 @@ const colors = {
 ## 🎨 ロゴ仕様・ガイドライン
 
 ### ロゴバリエーション
-ShuShuRinではシンボルマーク1つとプログラム実装による展開を行います：
+Shu Shu Rinではシンボルマーク1つとプログラム実装による展開を行います：
 
 1. **正方形ロゴ（シンボルマーク）**
    - ロゴマークのみ（画像ファイル）
@@ -314,7 +314,7 @@ ShuShuRinではシンボルマーク1つとプログラム実装による展開�
    - 用途：ファビコン、SNSアイコン、ローディング
 
 2. **テキストロゴ（プログラム実装）**
-   - "ShuShuRin"テキストをフォントで表現
+   - "Shu Shu Rin"テキストをフォントで表現
    - シンボルマークと組み合わせて横長レイアウト構成
    - 用途：ヘッダー、フッター、メインビジュアル
    - フォント：display（Noto Serif JP）または elegant（Inter）
@@ -358,7 +358,7 @@ logo/
 // シンボルマーク + テキストの組み合わせ例
 <div className="flex items-center gap-3">
   <img src="/logo/square/shushurin-symbol-gold.svg" className="w-8 h-8" />
-  <span className="font-display text-xl text-brand-primary">ShuShuRin</span>
+  <span className="font-display text-xl text-brand-primary">Shu Shu Rin</span>
 </div>
 ```
 
@@ -384,12 +384,12 @@ const Logo = ({ showText = true, color = 'gold', size = 'md', className = '' }) 
     <div className={`flex items-center gap-3 ${className}`}>
       <img 
         src={`/logo/square/shushurin-symbol-${color}.svg`}
-        alt="ShuShuRin Symbol"
+        alt="Shu Shu Rin Symbol"
         className={symbolSizes[size]}
       />
       {showText && (
         <span className={`font-display ${textSizes[size]} text-brand-${color === 'white' ? 'secondary' : 'primary'}`}>
-          ShuShuRin
+          Shu Shu Rin
         </span>
       )}
     </div>
@@ -410,7 +410,7 @@ const Logo = ({ showText = true, color = 'gold', size = 'md', className = '' }) 
 
 ### Google Maps 統合仕様
 
-ShuShuRinホームページにエレガントなアクセス情報セクションを実装し、上品なGoogle Maps表示を行います。
+Shu Shu Rinホームページにエレガントなアクセス情報セクションを実装し、上品なGoogle Maps表示を行います。
 
 #### 基本仕様
 ```javascript
@@ -437,7 +437,7 @@ const mapConfig = {
 
 #### エレガントなマップスタイル
 ```javascript
-// ShuShuRin専用カスタムマップスタイル
+// Shu Shu Rin専用カスタムマップスタイル
 const mapStyles = [
   {
     "featureType": "all",
@@ -524,7 +524,7 @@ const StoreInfo = () => {
             <p className="text-sophisticated-500 text-sm leading-relaxed">
               〒150-0001<br />
               東京都渋谷区神宮前1-2-3<br />
-              ShuShuRin Building 1F
+              Shu Shu Rin Building 1F
             </p>
           </div>
         </div>
@@ -599,7 +599,7 @@ const ElegantGoogleMap = () => {
 
       {/* 地図下部の装飾 */}
       <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md">
-        <p className="text-xs text-brand-primary font-medium">ShuShuRin</p>
+        <p className="text-xs text-brand-primary font-medium">Shu Shu Rin</p>
         <p className="text-xs text-sophisticated-500">セレクトショップ</p>
       </div>
     </div>
@@ -709,7 +709,7 @@ const MapFallback = () => {
       <address className="text-brand-primary not-italic">
         〒150-0001<br />
         東京都渋谷区神宮前1-2-3<br />
-        ShuShuRin Building 1F
+        Shu Shu Rin Building 1F
       </address>
     </div>
   );
@@ -728,7 +728,7 @@ REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 - Maps JavaScript API のみ有効
 - 日別クエリ制限設定
 
-この仕様により、ShuShuRinらしい上品でエレガントなアクセスセクションと、ブランドカラーに統一されたGoogle Maps表示が実現できます！
+この仕様により、Shu Shu Rinらしい上品でエレガントなアクセスセクションと、ブランドカラーに統一されたGoogle Maps表示が実現できます！
 
 ---
 
@@ -829,7 +829,7 @@ const HeroSection = () => {
           {/* ロゴ（ホワイト版・大サイズ・影効果） */}
           <img 
             src="/assets/images/logo/horizontal/shushurin-logo-horizontal-white.svg"
-            alt="ShuShuRin"
+            alt="Shu Shu Rin"
             className="w-80 h-26 mx-auto mb-8 drop-shadow-lg filter"
           />
           
@@ -987,13 +987,13 @@ docs: README.mdの更新
 
 ---
 
-## 📝 ShuShuRin 専用コンテンツ詳細
+## 📝 Shu Shu Rin 専用コンテンツ詳細
 
 ### ホームページ - メインメッセージ
 ```
 「年齢を脱ぐ、冒険を着る」
 
-ShuShuRinは、姉妹で営む小さなセレクトショップ。
+Shu Shu Rinは、姉妹で営む小さなセレクトショップ。
 「着てみたい」と思える一着との出会いが、あなたの毎日を少しだけ特別にしてくれるはず。
 今まで選ばなかった色、形、スタイルにも、そっと手を伸ばせるように。
 ```
@@ -1046,7 +1046,7 @@ ShuShuRinは、姉妹で営む小さなセレクトショップ。
 
 ---
 
-*このルールに従って、ShuShuRinらしいエレガンスと冒険心に満ちたセレクトショップサイトを構築しましょう。*
+*このルールに従って、Shu Shu Rinらしいエレガンスと冒険心に満ちたセレクトショップサイトを構築しましょう。*
 
 ---
 

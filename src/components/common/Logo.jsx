@@ -3,7 +3,7 @@ import LogoBlack from '../../assets/images/logo/square/shushurin-symbol-black.sv
 import LogoWhite from '../../assets/images/logo/square/shushurin-symbol-white.svg';
 
 /**
- * ShuShuRin ロゴコンポーネント（新仕様）
+ * Shu Shu Rin ロゴコンポーネント（新仕様）
  * 
  * @param {boolean} showText - テキストを表示するか
  * @param {string} color - 'gold' | 'black' | 'white'
@@ -65,12 +65,12 @@ const Logo = ({
     <div className={`flex items-center gap-3 ${className}`}>
       <img 
         src={imageSrc} 
-        alt="ShuShuRin Logo"  
+        alt="Shu Shu Rin Logo"  
         className={`${symbolSizes[size]} w-auto`} 
       />
       {showText && (
         <span className={`font-display ${textSizes[size]} ${color === 'white' ? 'text-white' : 'text-brand-primary'} font-medium tracking-wide`}>
-          ShuShuRin
+          Shu Shu Rin
         </span>
       )}
     </div>

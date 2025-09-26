@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * ShuShuRin ボタンコンポーネント
+ * Shu Shu Rin ボタンコンポーネント
  * 
  * @param {string} variant - 'primary' | 'secondary' | 'elegant' | 'outline'
  * @param {string} size - 'sm' | 'md' | 'lg'

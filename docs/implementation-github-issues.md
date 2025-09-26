@@ -1,7 +1,7 @@
-# ShuShuRin サイト実装 GitHub Issues 一覧
+# Shu Shu Rin サイト実装 GitHub Issues 一覧
 
 ## 概要
-「年齢を脱ぐ、冒険を着る」をコンセプトとするアパレルセレクトショップ **ShuShuRin** のスマートフォン専用サイトを段階的に実装するためのGitHub Issue一覧です。
+「年齢を脱ぐ、冒険を着る」をコンセプトとするアパレルセレクトショップ **Shu Shu Rin** のスマートフォン専用サイトを段階的に実装するためのGitHub Issue一覧です。
 
 **参考ルール**: `apparel-brand-site-rules.md`
 
@@ -12,12 +12,12 @@
 ### Issue #1: React + Tailwind CSS 開発環境構築
 
 **概要**  
-ShuShuRinサイト開発のための基盤となるReact + Tailwind CSS環境を構築する。
+Shu Shu Rinサイト開発のための基盤となるReact + Tailwind CSS環境を構築する。
 
 **タスク**
 - [ ] Create React Appでプロジェクト作成
 - [ ] Tailwind CSSの導入・設定
-- [ ] ShuShuRin専用カラーパレット設定
+- [ ] Shu Shu Rin専用カラーパレット設定
 - [ ] フォント設定（Noto Serif JP, Crimson Text, Inter, Noto Sans JP）
 - [ ] 基本ディレクトリ構造の作成
 - [ ] ESLint, Prettierの設定
@@ -38,7 +38,7 @@ ShuShuRinサイト開発のための基盤となるReact + Tailwind CSS環境を
 
 ---
 
-### Issue #2: ShuShuRin カスタムTailwind設定
+### Issue #2: Shu Shu Rin カスタムTailwind設定
 
 **概要**  
 ブランドアイデンティティを表現するためのTailwind CSSカスタム設定を実装する。
@@ -160,7 +160,7 @@ colors: {
 - [ ] 各コンポーネントが独立して動作
 - [ ] プロップスでカスタマイズ可能
 - [ ] アクセシビリティ対応
-- [ ] ShuShuRinブランドカラー使用
+- [ ] Shu Shu Rinブランドカラー使用
 
 **Labels**: `components`, `ui`, `design-system`  
 **Priority**: Medium  
@@ -168,10 +168,10 @@ colors: {
 
 ---
 
-### Issue #4.5: ShuShuRin ロゴ仕様・作成ガイドライン
+### Issue #4.5: Shu Shu Rin ロゴ仕様・作成ガイドライン
 
 **概要**  
-ShuShuRinブランドアイデンティティを表現するロゴの仕様策定と作成ガイドラインを整備する。
+Shu Shu Rinブランドアイデンティティを表現するロゴの仕様策定と作成ガイドラインを整備する。
 
 **ロゴバリエーション**
 1. **正方形ロゴ（シンボルマーク）**
@@ -180,7 +180,7 @@ ShuShuRinブランドアイデンティティを表現するロゴの仕様策�
    - 用途：ファビコン、SNSアイコン、ローディング
 
 2. **テキストロゴ（プログラム実装）**
-   - "ShuShuRin"テキストをフォントで表現
+   - "Shu Shu Rin"テキストをフォントで表現
    - シンボルマークと組み合わせて横長レイアウト構成
    - 用途：ヘッダー、フッター、メインビジュアル
    - フォント：display（Noto Serif JP）または elegant（Inter）
@@ -228,12 +228,12 @@ assets/images/logo/
 ### Issue #5: ホームページ - ヒーローセクション実装
 
 **概要**  
-ShuShuRinのメインメッセージを伝えるヒーローセクションを実装する。
+Shu Shu Rinのメインメッセージを伝えるヒーローセクションを実装する。
 
 **メインメッセージ**
 > 「年齢を脱ぐ、冒険を着る」
 >
-> ShuShuRinは、姉妹で営む小さなセレクトショップ。
+> Shu Shu Rinは、姉妹で営む小さなセレクトショップ。
 > 「着てみたい」と思える一着との出会いが、あなたの毎日を少しだけ特別にしてくれるはず。
 > 今まで選ばなかった色、形、スタイルにも、そっと手を伸ばせるように。
 
@@ -303,7 +303,7 @@ ShuShuRinのメインメッセージを伝えるヒーローセクションを�
 ### Issue #7: ホームページ - Instagram連携セクション
 
 **概要**  
-ShuShuRinのInstagram投稿を埋め込み、SNSとの連携を図る。
+Shu Shu RinのInstagram投稿を埋め込み、SNSとの連携を図る。
 
 **タスク**
 - [x] Instagram投稿埋め込み
@@ -349,7 +349,7 @@ ShuShuRinのInstagram投稿を埋め込み、SNSとの連携を図る。
 - **レイアウト**: 上品な2カラム構成（情報 + 将来的な地図エリア）
 - **カード**: 半透明背景、洗練された角丸、エレガントな影
 - **アイコン**: MapPinIcon、TrainIcon等（Heroicons使用）
-- **カラー**: ShuShuRinブランドカラー統一
+- **カラー**: Shu Shu Rinブランドカラー統一
 - **フォント**: display（Noto Serif JP）でセクションタイトル
 
 **実装仕様**
@@ -383,7 +383,7 @@ const AccessSection = () => {
 - [x] 店舗情報が見やすく表示される
 - [x] スマートフォンで適切に表示
 - [x] Instagram DMへの導線が明確
-- [x] ShuShuRinらしいエレガントな印象
+- [x] Shu Shu Rinらしいエレガントな印象
 
 **Labels**: `homepage`, `access`, `store-info`, `responsive`  
 **Priority**: Medium  
@@ -394,7 +394,7 @@ const AccessSection = () => {
 ### Issue #7.6: Google Maps統合・エレガントマップ実装 [低優先度]
 
 **概要**  
-ShuShuRinらしい上品なGoogle Maps表示を実装し、アクセスセクションを完成させる。
+Shu Shu Rinらしい上品なGoogle Maps表示を実装し、アクセスセクションを完成させる。
 
 **⚠️ 実装タイミング**: 基本機能完成後の追加実装
 
@@ -404,7 +404,7 @@ ShuShuRinらしい上品なGoogle Maps表示を実装し、アクセスセクシ
 - [x] Google Maps iframe実装（暫定対応）
 - [ ] Google Maps JavaScript API設定
 - [ ] `ElegantGoogleMap.jsx`コンポーネント作成
-- [ ] ShuShuRin専用カスタムマップスタイル実装
+- [ ] Shu Shu Rin専用カスタムマップスタイル実装
 - [ ] カスタムマーカー（ロゴ使用）
 - [ ] 遅延読み込み対応
 - [ ] 地図フォールバック機能
@@ -442,7 +442,7 @@ const mapStyles = [
 
 **受け入れ条件**
 - [ ] ブランドカラーに統一されたマップ表示
-- [ ] ShuShuRinロゴマーカーが表示
+- [ ] Shu Shu Rinロゴマーカーが表示
 - [ ] 軽快な動作（パフォーマンス劣化なし）
 - [ ] 地図が表示できない場合の適切な代替表示
 
@@ -502,7 +502,7 @@ const mapStyles = [
 ### Issue #9: コーディネートページ実装
 
 **概要**  
-ShuShuRinのスタイリング写真を魅力的に表示するギャラリーページを実装する。
+Shu Shu Rinのスタイリング写真を魅力的に表示するギャラリーページを実装する。
 
 **タスク**
 - [x] `Coordinate.jsx`ページ作成
@@ -537,7 +537,7 @@ ShuShuRinのスタイリング写真を魅力的に表示するギャラリー�
 ### Issue #10: ブランドストーリーページ実装
 
 **概要**  
-ShuShuRinの始まりと姉妹デザイナーの想いを伝えるページを実装する。
+Shu Shu Rinの始まりと姉妹デザイナーの想いを伝えるページを実装する。
 
 **タスク**
 - [x] `BrandStory.jsx`ページ作成
@@ -549,7 +549,7 @@ ShuShuRinの始まりと姉妹デザイナーの想いを伝えるページを�
 
 **コンテンツ構成**
 1. **ショップの始まり**
-   - なぜShuShuRinを始めたか
+   - なぜShu Shu Rinを始めたか
    - 大切にしている想い
 
 2. **姉妹デザイナー紹介**
@@ -778,16 +778,16 @@ Framer Motionを使用してサイト全体のユーザー体験を向上させ�
 - [ ] サイトマップ生成
 
 **メタデータ内容**
-- **ホーム**: ShuShuRin | 年齢を脱ぐ、冒険を着る
-- **コンセプト**: コンセプト | ShuShuRin
-- **コーディネート**: コーディネート | ShuShuRin
-- **ブランドストーリー**: ブランドストーリー | ShuShuRin
-- **アクセス**: アクセス | ShuShuRin
-- **お問い合わせ**: お問い合わせ | ShuShuRin
+- **ホーム**: Shu Shu Rin | 年齢を脱ぐ、冒険を着る
+- **コンセプト**: コンセプト | Shu Shu Rin
+- **コーディネート**: コーディネート | Shu Shu Rin
+- **ブランドストーリー**: ブランドストーリー | Shu Shu Rin
+- **アクセス**: アクセス | Shu Shu Rin
+- **お問い合わせ**: お問い合わせ | Shu Shu Rin
 
 **Open Graph画像**
 - 各ページ用のOG画像作成
-- ShuShuRinブランドカラー使用
+- Shu Shu Rinブランドカラー使用
 - 1200x630px サイズ
 
 **受け入れ条件**
@@ -991,7 +991,7 @@ AWS Amplifyを使用して本番環境にデプロイする。
 
 ---
 
-*この実装計画に従って、ShuShuRinらしいエレガンスと冒険心に満ちた素敵なセレクトショップサイトを段階的に構築していきましょう。*
+*この実装計画に従って、Shu Shu Rinらしいエレガンスと冒険心に満ちた素敵なセレクトショップサイトを段階的に構築していきましょう。*
 
 **全体管理ラベル**: `shushurin-implementation`, `mobile-first`, `react`, `tailwind`  
 **プロジェクト期間**: 8-12週間  
