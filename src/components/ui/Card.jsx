@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * ShuShuRin カードコンポーネント
+ * Shu Shu Rin カードコンポーネント
  * 
  * @param {string} variant - 'default' | 'elevated' | 'outlined' | 'glass'
  * @param {string} padding - 'none' | 'sm' | 'md' | 'lg'

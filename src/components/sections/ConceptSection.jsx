@@ -23,7 +23,7 @@ const ConceptSection = () => {
             Concept
           </h2>
           <p className="text-sophisticated-500 font-light text-sm leading-relaxed">
-            ShuShuRinが大切にしている想い
+            Shu Shu Rinが大切にしている想い
           </p>
         </div>
 

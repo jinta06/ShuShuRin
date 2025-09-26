@@ -20,7 +20,7 @@ const BrandStory = () => {
           </h1>
           <p className="text-sophisticated-500 text-sm leading-relaxed mb-8">
             姉妹で営む小さなセレクトショップ<br />
-            ShuShuRinの始まりと想いをお伝えします
+            Shu Shu Rinの始まりと想いをお伝えします
           </p>
           <div className="w-16 h-0.5 bg-brand-accent mx-auto"></div>
         </div>
@@ -41,7 +41,7 @@ const BrandStory = () => {
           <div className="bg-accent-50 rounded-3xl p-8 mb-8">
             <p className="text-sophisticated-500 text-sm leading-relaxed text-center mb-6">
               「年齢を脱ぐ、冒険を着る」<br />
-              この想いから、ShuShuRinは生まれました。
+              この想いから、Shu Shu Rinは生まれました。
             </p>
             <div className="space-y-4">
               <p className="text-sophisticated-500 text-sm leading-relaxed">
@@ -67,56 +67,63 @@ const BrandStory = () => {
             </h2>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 shadow-sm">
-            <div className="flex flex-col items-center mb-6">
-              <div className="relative w-32 h-40 overflow-hidden rounded-2xl shadow-md mb-4">
-                <picture>
-                  <source srcSet={ownersPhotoWebp} type="image/webp" />
-                  <img
-                    src={ownersPhotoJpg}
-                    alt="ShuShuRin店主の写真"
-                    className="w-full h-full object-cover object-center"
-                  />
-                </picture>
-              </div>
-              <h3 className="text-lg font-display text-brand-primary mb-2 text-center">
-                ShuShuRin 店主
-              </h3>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-accent-50 rounded-2xl p-4 text-center">
-                <p className="text-brand-accent font-display text-sm font-medium mb-1">
-                  セットアップコーデ全国1位
-                </p>
-                <p className="text-sophisticated-500 text-xs">
-                  スタイリング技術で認められた実績
-                </p>
-              </div>
+          {/* 写真にオーバーレイしたデザイン */}
+          <div className="relative">
+            <div className="relative w-full h-80 overflow-hidden rounded-3xl shadow-xl">
+              <picture>
+                <source srcSet={ownersPhotoWebp} type="image/webp" />
+                <img
+                  src={ownersPhotoJpg}
+                  alt="Shu Shu Rin店主の写真"
+                  className="w-full h-full object-cover object-center"
+                />
+              </picture>
               
-              <div className="bg-accent-50 rounded-2xl p-4 text-center">
-                <p className="text-brand-accent font-display text-sm font-medium mb-1">
+              {/* グラデーションオーバーレイ */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              
+              {/* テキストオーバーレイ */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-display font-medium mb-2">
+                  Shu Shu Rin 店主
+                </h3>
+                <div className="flex items-center gap-2 mb-2">
+                  <StarIcon className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm font-medium">セットアップコーデ全国1位</span>
+                </div>
+                <p className="text-sm text-white/90 leading-relaxed">
+                  お客様一人ひとりに寄り添った<br />
                   1着で何通りものコーデをご提案
                 </p>
-                <p className="text-sophisticated-500 text-xs">
-                  多様なスタイリングでお客様をサポート
-                </p>
-              </div>
-
-              <div className="pt-2">
-                <p className="text-sophisticated-500 text-sm leading-relaxed text-center">
-                  お客様一人ひとりのライフスタイルに寄り添ったスタイリングを得意としています。「似合う」だけではなく、「着ていて心地よい」スタイルをご提案いたします。
-                </p>
               </div>
             </div>
+
+            {/* フローティングカード */}
+            {/* <div className="absolute -bottom-6 left-4 right-4">
+              <div className="bg-white rounded-2xl p-4 shadow-lg border border-sophisticated-100">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="text-center">
+                    <div className="text-lg font-display font-bold text-brand-accent mb-1">1着で</div>
+                    <div className="text-xs text-sophisticated-500">何通りものコーデ</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-display font-bold text-brand-accent mb-1">心地よい</div>
+                    <div className="text-xs text-sophisticated-500">スタイリング</div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
           </div>
+
+          {/* 下部余白調整 */}
+          <div className="h-8"></div>
         </div>
       </section>
 
       {/* 店舗写真セクション */}
       <section className="py-12 bg-white">
         <div className="max-w-lg mx-auto px-4">
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-accent/10 rounded-full mb-4">
               <SparklesIcon className="w-8 h-8 text-brand-accent" />
             </div>
@@ -126,48 +133,60 @@ const BrandStory = () => {
           </div>
 
           <div className="space-y-8">
-            {/* 店舗外観 */}
-            <div className="bg-sophisticated-50 rounded-3xl p-6">
-              <div className="flex justify-center mb-4">
-                <div className="relative w-48 h-64 overflow-hidden rounded-2xl shadow-lg">
-                  <picture>
-                    <source srcSet={storeExteriorWebp} type="image/webp" />
-                    <img
-                      src={storeExteriorJpg}
-                      alt="ShuShuRin店舗外観"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </picture>
+            {/* 店舗外観 - 店主紹介と同じスタイル */}
+            <div className="relative group">
+              <div className="relative w-full h-96 overflow-hidden rounded-3xl shadow-xl">
+                <picture>
+                  <source srcSet={storeExteriorWebp} type="image/webp" />
+                  <img
+                    src={storeExteriorJpg}
+                    alt="Shu Shu Rin店舗外観"
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  />
+                </picture>
+                
+                {/* グラデーションオーバーレイ */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                
+                {/* テキストオーバーレイ（左下） */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-xl font-display font-medium mb-2">
+                    温かみのある外観
+                  </h3>
+                  <p className="text-sm text-white/90 leading-relaxed">
+                    小さな路地にひっそりと佇む<br />
+                    アットホームな雰囲気のお店
+                  </p>
                 </div>
               </div>
-              <h3 className="text-lg font-display text-brand-primary mb-2 text-center">
-                温かみのある外観
-              </h3>
-              <p className="text-sophisticated-500 text-sm leading-relaxed text-center">
-                小さな路地にひっそりと佇む、アットホームな雰囲気のお店です。
-              </p>
             </div>
 
-            {/* 店舗内装 */}
-            <div className="bg-sophisticated-50 rounded-3xl p-6">
-              <div className="flex justify-center mb-4">
-                <div className="relative w-48 h-64 overflow-hidden rounded-2xl shadow-lg">
-                  <picture>
-                    <source srcSet={storeInteriorWebp} type="image/webp" />
-                    <img
-                      src={storeInteriorJpg}
-                      alt="ShuShuRin店舗内装"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </picture>
+            {/* 店舗内装 - 店主紹介と同じスタイル */}
+            <div className="relative group">
+              <div className="relative w-full h-96 overflow-hidden rounded-3xl shadow-xl">
+                <picture>
+                  <source srcSet={storeInteriorWebp} type="image/webp" />
+                  <img
+                    src={storeInteriorJpg}
+                    alt="Shu Shu Rin店舗内装"
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  />
+                </picture>
+                
+                {/* グラデーションオーバーレイ */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                
+                {/* テキストオーバーレイ（左下） */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-xl font-display font-medium mb-2">
+                    心地よい空間
+                  </h3>
+                  <p className="text-sm text-white/90 leading-relaxed">
+                    ゆったりとお買い物していただける<br />
+                    上品で落ち着いた空間
+                  </p>
                 </div>
               </div>
-              <h3 className="text-lg font-display text-brand-primary mb-2 text-center">
-                心地よい空間
-              </h3>
-              <p className="text-sophisticated-500 text-sm leading-relaxed text-center">
-                ゆったりとお買い物していただける、上品で落ち着いた空間です。
-              </p>
             </div>
           </div>
         </div>

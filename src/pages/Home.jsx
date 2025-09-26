@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import Hero from '../components/sections/Hero';
 import ConceptSection from '../components/sections/ConceptSection';
+import ImageGallerySection from '../components/sections/ImageGallerySection';
 import InstagramSection from '../components/sections/InstagramSection';
 import AccessInfo from '../components/sections/AccessInfo';
 
 const Home = () => {
   useEffect(() => {
     // ページタイトル設定
-    document.title = 'ShuShuRin | 年齢を脱ぐ、冒険を着る';
+    document.title = 'Shu Shu Rin | 年齢を脱ぐ、冒険を着る';
     
     // URLのハッシュがある場合、該当セクションにスクロール（ヘッダー高さを考慮）
     if (window.location.hash === '#access') {
@@ -35,6 +36,9 @@ const Home = () => {
 
       {/* Concept Section - Phase 3 Issue #6 */}
       <ConceptSection />
+
+      {/* Image Gallery Section */}
+      <ImageGallerySection />
 
       {/* Instagram Section - Phase 3 Issue #7 */}
       <InstagramSection />

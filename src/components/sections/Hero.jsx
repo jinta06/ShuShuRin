@@ -3,7 +3,7 @@ import Logo from '../common/Logo';
 import heroImage from '../../assets/images/hero/hero-main-visual.webp';
 
 /**
- * ShuShuRin ヒーローセクション
+ * Shu Shu Rin ヒーローセクション
  * - フルスクリーン背景画像
  * - エレガントなオーバーレイ
  * - ロゴ・キャッチコピー・説明文の配置
@@ -62,7 +62,7 @@ const Hero = () => {
           <div className="animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
             <div className="text-center">
               <p className="text-white/95 font-serif text-xs font-light leading-relaxed drop-shadow-sm">
-                ShuShuRinは、姉妹で営む小さなセレクトショップ。<br />
+                Shu Shu Rinは、姉妹で営む小さなセレクトショップ。<br />
                 「着てみたい」と思える一着との出会いが、<br />
                 あなたの毎日を少しだけ特別にしてくれるはず。<br />
                 今まで選ばなかった色、形、スタイルにも、<br />

@@ -8,7 +8,7 @@ const Concept = () => {
   
   useEffect(() => {
     // ページタイトル設定
-    document.title = 'コンセプト | ShuShuRin';
+    document.title = 'コンセプト | Shu Shu Rin';
     
     // URLのハッシュがある場合、該当セクションにスクロール（ヘッダー高さを考慮）
     if (window.location.hash) {
@@ -58,7 +58,7 @@ const Concept = () => {
             Concept
           </h1>
           <p className="text-sophisticated-500 text-sm leading-relaxed mb-8">
-            ShuShuRinが大切にしている想いを<br />
+            Shu Shu Rinが大切にしている想いを<br />
             3つのコンセプトでお伝えします
           </p>
           <div className="w-16 h-0.5 bg-brand-accent mx-auto"></div>

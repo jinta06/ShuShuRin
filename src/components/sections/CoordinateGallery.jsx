@@ -1,29 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { coordinates } from '../../data/coordinates';
 
 const CoordinateGallery = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  // カジュアルときれいめ（エレガント）のみ表示するカテゴリ
-  const filteredCategories = [
-    { id: 'all', name: 'All', color: 'text-brand-primary' },
-    { id: 'casual', name: 'Casual', color: 'text-accent-500' },
-    { id: 'elegant', name: 'Elegant', color: 'text-sophisticated-500' }
-  ];
-
-  // カテゴリ別フィルタリング
-  const availableCoordinates = coordinates.filter(coord => 
-    coord.category === 'casual' || coord.category === 'elegant'
-  );
-  
-  const filteredCoordinates = selectedCategory === 'all' 
-    ? availableCoordinates 
-    : availableCoordinates.filter(coord => coord.category === selectedCategory);
+  // 全てのコーディネートを表示（orderプロパティでソート）
+  const displayCoordinates = [...coordinates].sort((a, b) => {
+    // orderプロパティがある場合は数値順でソート
+    if (a.order !== undefined && b.order !== undefined) {
+      return a.order - b.order;
+    }
+    // orderプロパティがない場合は元の配列順を維持
+    if (a.order !== undefined) return -1;
+    if (b.order !== undefined) return 1;
+    return 0;
+  });
 
 
-  // アイテムが大きい画像かどうかを判定（7番目、15番目、23番目...）
-  const isLargeItem = (index) => {
-    return (index + 1) % 7 === 0;
+  // アイテムが大きい画像かどうかを判定（データのlargeオプションで制御）
+  const isLargeItem = (coordinate) => {
+    return coordinate.large === true;
   };
 
   // 画像の適切なアスペクト比を計算（width/heightから）
@@ -39,43 +33,18 @@ const CoordinateGallery = () => {
     <div className="w-full">
       {/* スマホ幅制限を適用 - 他のページと同じmax-w-lg */}
       <div className="max-w-lg mx-auto px-4">
-        {/* カテゴリフィルター - ミニマルなアパレルスタイル */}
-        <div className="mb-12">
-          <div className="flex justify-center items-center">
-            <div className="flex gap-8">
-              {filteredCategories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`relative font-display text-sm tracking-wider uppercase transition-all duration-300 ${
-                    selectedCategory === category.id
-                      ? 'text-brand-primary'
-                      : 'text-sophisticated-400 hover:text-brand-primary'
-                  }`}
-                >
-                  {category.name}
-                  {/* アンダーライン */}
-                  <div className={`absolute -bottom-2 left-0 h-0.5 bg-brand-accent transition-all duration-300 ${
-                    selectedCategory === category.id ? 'w-full' : 'w-0'
-                  }`} />
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* メインギャラリー - ファッション風変則グリッドレイアウト */}
         <div>
         {/* 
           変則グリッドパターン（スマホ幅制限 max-w-lg 適用）:
-          - 6枚（2列×3行）の後に1枚の大きい画像
-          - パターン: 2列, 2列, 2列, 1列（大）, 2列, 2列, 2列, 1列（大）...
-          - 大きい画像: 7番目、15番目、23番目...（7で割り切れる番号）
+          - 通常: 2列グリッド（grid-cols-2）
+          - 大きい画像: largeオプションがtrueの場合、2列幅で表示（col-span-2）
           - 大きい画像も縦長アスペクト比を維持（横長にはならない）
         */}
         <div className="grid grid-cols-2 gap-2">
-          {filteredCoordinates.map((coordinate, index) => {
-            const isLarge = isLargeItem(index);
+          {displayCoordinates.map((coordinate, index) => {
+            const isLarge = isLargeItem(coordinate);
             
             return (
               <div 
@@ -125,7 +94,7 @@ const CoordinateGallery = () => {
       </div>
 
         {/* 空の状態 */}
-        {filteredCoordinates.length === 0 && (
+        {displayCoordinates.length === 0 && (
           <div className="text-center py-20">
             <div className="w-16 h-16 mx-auto mb-6 bg-sophisticated-100 rounded-full flex items-center justify-center">
               <svg className="w-8 h-8 text-sophisticated-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,10 +102,10 @@ const CoordinateGallery = () => {
               </svg>
             </div>
             <h3 className="text-lg font-display text-sophisticated-400 mb-2 tracking-wide">
-              No coordinates found
+              コーディネートが見つかりません
             </h3>
             <p className="text-sm text-sophisticated-300">
-              Try selecting a different category
+              しばらくお待ちください
             </p>
           </div>
         )}

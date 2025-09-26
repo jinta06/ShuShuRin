@@ -1,4 +1,4 @@
-/* Google Fonts - ShuShuRin エレガントフォント */
+/* Google Fonts - Shu Shu Rin エレガントフォント */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap');
 
 /* Tailwind CSS */
@@ -19,7 +19,7 @@
   }
 }
 
-/* ShuShuRin カスタムコンポーネントスタイル */
+/* Shu Shu Rin カスタムコンポーネントスタイル */
 @layer components {
   .btn-primary {
     @apply bg-brand-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-900 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent-500/30;

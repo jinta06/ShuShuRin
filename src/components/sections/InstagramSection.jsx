@@ -199,7 +199,7 @@ const InstagramSection = () => {
             </div>
 
             {/* Instagram プロフィールリンク */}
-            <div className="text-center">
+            {/* <div className="text-center">
               <button 
                 className="
                   inline-flex items-center gap-2
@@ -218,7 +218,7 @@ const InstagramSection = () => {
                 <UserPlusIcon className="w-4 h-4" />
                 プロフィールを見る
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 

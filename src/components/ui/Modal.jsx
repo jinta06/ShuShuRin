@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * ShuShuRin モーダルコンポーネント
+ * Shu Shu Rin モーダルコンポーネント
  * 
  * @param {boolean} isOpen - モーダル表示状態
  * @param {Function} onClose - モーダルを閉じる関数
