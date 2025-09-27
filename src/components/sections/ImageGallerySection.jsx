@@ -1,11 +1,11 @@
 import React from 'react';
-import sectionMainVisual1 from '../../assets/images/gallery/gallery_01.webp';
-import sectionMainVisual2 from '../../assets/images/gallery/gallery_02.webp';
+import sectionMainVisual1 from '../../assets/images/brandstory/store-interior.webp';
+import sectionMainVisual2 from '../../assets/images/brandstory/store-exterior.webp';
 
 const ImageGallerySection = () => {
   return (
-    <section className="pt-4 pb-32 px-4 bg-brand-secondary">
-      <div className="max-w-6xl mx-auto">
+    <section className="pb-32 bg-brand-secondary">
+      <div className="w-full">
         {/* 2枚の画像を横並びで配置 */}
         <div className="grid grid-cols-2 gap-0 items-start">
           {/* 左の画像（20px下にオフセット） */}
