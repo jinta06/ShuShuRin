@@ -37,7 +37,9 @@ const InstagramSection = () => {
   const [currentSlide, setCurrentSlide] = useState(posts.length * 15); // 中央のセットから開始
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState(0);
+  const [dragStartY, setDragStartY] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState(null); // 'horizontal' | 'vertical' | null
   const sliderRef = useRef(null);
 
   // 無限ループ用のデータ配列を作成（完全シームレスループ用）
@@ -51,35 +53,71 @@ const InstagramSection = () => {
     return extended;
   };
 
-  // スワイプ処理（passive event対応）
+  // スワイプ処理（Safari最適化 - 方向判定付き）
   const handleTouchStart = (e) => {
     setIsDragging(true);
     setDragStart(e.touches[0].clientX);
+    setDragStartY(e.touches[0].clientY);
+    setSwipeDirection(null);
+    setDragOffset(0);
+    
+    // Safari向け：タッチ開始時にスクロールを一時的に無効化
+    if (sliderRef.current) {
+      sliderRef.current.style.touchAction = 'none';
+    }
   };
 
   const handleTouchMove = (e) => {
     if (!isDragging) return;
+    
     const currentX = e.touches[0].clientX;
-    const diff = dragStart - currentX;
-    setDragOffset(diff);
+    const currentY = e.touches[0].clientY;
+    const diffX = Math.abs(currentX - dragStart);
+    const diffY = Math.abs(currentY - dragStartY);
+    
+    // 初回移動で方向を判定
+    if (!swipeDirection && (diffX > 5 || diffY > 5)) {
+      if (diffX > diffY) {
+        setSwipeDirection('horizontal');
+      } else {
+        setSwipeDirection('vertical');
+      }
+    }
+    
+    // 横スワイプの場合のみ処理
+    if (swipeDirection === 'horizontal') {
+      const diff = dragStart - currentX;
+      setDragOffset(diff);
+    }
   };
 
   const handleTouchEnd = () => {
     if (!isDragging) return;
     setIsDragging(false);
     
-    const threshold = 50; // スワイプ感度
-    if (Math.abs(dragOffset) > threshold) {
-      if (dragOffset > 0) {
-        // 右にスワイプ（次のスライド）
-        setCurrentSlide(prev => prev + 1);
-      } else {
-        // 左にスワイプ（前のスライド）
-        setCurrentSlide(prev => prev - 1);
+    // Safari向け：touchActionを復元
+    if (sliderRef.current) {
+      sliderRef.current.style.touchAction = swipeDirection === 'vertical' ? 'pan-y' : 'pan-x';
+    }
+    
+    // 横スワイプの場合のみスライド変更
+    if (swipeDirection === 'horizontal') {
+      const threshold = 25; // さらに感度を向上（30→25）
+      const velocity = Math.abs(dragOffset) / 100; // 速度も考慮
+      
+      if (Math.abs(dragOffset) > threshold || velocity > 0.3) {
+        if (dragOffset > 0) {
+          // 右にスワイプ（次のスライド）
+          setCurrentSlide(prev => prev + 1);
+        } else {
+          // 左にスワイプ（前のスライド）
+          setCurrentSlide(prev => prev - 1);
+        }
       }
     }
     
     setDragOffset(0);
+    setTimeout(() => setSwipeDirection(null), 100); // 少し遅延してリセット
   };
 
   // 自動スライド機能（完全シームレスループ）
@@ -126,9 +164,36 @@ const InstagramSection = () => {
 
   const extendedPosts = getExtendedPosts();
 
+  // passive: false でイベントリスナーを設定（Safari向け）
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const handleTouchStartPassive = (e) => {
+      if (swipeDirection === 'horizontal') {
+        e.preventDefault();
+      }
+    };
+
+    const handleTouchMovePassive = (e) => {
+      if (swipeDirection === 'horizontal') {
+        e.preventDefault();
+      }
+    };
+
+    // passive: false でイベントリスナーを追加
+    slider.addEventListener('touchstart', handleTouchStartPassive, { passive: false });
+    slider.addEventListener('touchmove', handleTouchMovePassive, { passive: false });
+
+    return () => {
+      slider.removeEventListener('touchstart', handleTouchStartPassive);
+      slider.removeEventListener('touchmove', handleTouchMovePassive);
+    };
+  }, [swipeDirection]);
+
   return (
-    <section className="py-8 bg-neutral-elegant">
-      <div className="w-full">
+    <section className="py-8 bg-neutral-elegant" style={{ touchAction: 'pan-y' }}>
+      <div className="w-full" style={{ touchAction: 'pan-y' }}>
         {/* セクションヘッダー */}
         <div className="text-center mb-8 px-4">
           <h2 className="text-2xl font-display text-brand-primary mb-3 leading-relaxed">
@@ -140,14 +205,16 @@ const InstagramSection = () => {
           </p>
         </div>
 
-        {/* スライドカルーセル（シンプル版） */}
-        <div className="relative overflow-hidden">
+        {/* スライドカルーセル（Safari最適化版） */}
+        <div className="relative overflow-hidden" style={{ touchAction: 'pan-x' }}>
           <div 
             ref={sliderRef}
-            className={`flex ${isDragging ? '' : 'transition-transform duration-500 ease-out'}`}
+            className={`flex ${isDragging && swipeDirection === 'horizontal' ? '' : 'transition-transform duration-500 ease-out'}`}
             style={{
-              transform: `translateX(calc(-${currentSlide * 60}% + 20% + ${isDragging ? -dragOffset : 0}px))`,
-              touchAction: 'pan-x'
+              transform: `translateX(calc(-${currentSlide * 60}% + 20% + ${isDragging && swipeDirection === 'horizontal' ? -dragOffset : 0}px))`,
+              touchAction: 'pan-x',
+              userSelect: 'none',
+              WebkitUserSelect: 'none'
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -172,9 +239,19 @@ const InstagramSection = () => {
                       isCenter ? 'scale-100 opacity-100' : 'scale-100 opacity-70'
                     }`}
                     onClick={() => {
-                      if (!isDragging && Math.abs(dragOffset) < 10) {
+                      if (!isDragging && Math.abs(dragOffset) < 10 && swipeDirection !== 'horizontal') {
                         window.open(post.instagramUrl, '_blank');
                       }
+                    }}
+                    onPointerDown={(e) => {
+                      // ポインターイベントでも対応
+                      e.currentTarget.style.setProperty('--touch-active', '1');
+                    }}
+                    onPointerUp={(e) => {
+                      e.currentTarget.style.removeProperty('--touch-active');
+                    }}
+                    onPointerLeave={(e) => {
+                      e.currentTarget.style.removeProperty('--touch-active');
                     }}
                   >
                     {/* Instagram画像 */}
