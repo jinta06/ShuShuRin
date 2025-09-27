@@ -51,27 +51,24 @@ const InstagramSection = () => {
     return extended;
   };
 
-  // スワイプ処理（Safari最適化）
+  // スワイプ処理（passive event対応）
   const handleTouchStart = (e) => {
-    e.preventDefault(); // Safari向けデフォルト動作防止
     setIsDragging(true);
     setDragStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e) => {
     if (!isDragging) return;
-    e.preventDefault(); // Safari向けスクロール防止
     const currentX = e.touches[0].clientX;
     const diff = dragStart - currentX;
     setDragOffset(diff);
   };
 
-  const handleTouchEnd = (e) => {
+  const handleTouchEnd = () => {
     if (!isDragging) return;
-    e.preventDefault(); // Safari向けデフォルト動作防止
     setIsDragging(false);
     
-    const threshold = 80; // Safari向けに感度調整
+    const threshold = 50; // スワイプ感度
     if (Math.abs(dragOffset) > threshold) {
       if (dragOffset > 0) {
         // 右にスワイプ（次のスライド）
@@ -96,7 +93,7 @@ const InstagramSection = () => {
     return () => clearInterval(timer);
   }, [isDragging]);
 
-  // Safari最適化されたシームレスなリセット処理
+  // シンプルなシームレスリセット処理
   useEffect(() => {
     const totalSlides = posts.length * 30; // 30セット分
     const midPoint = posts.length * 15; // 中央点
@@ -106,22 +103,18 @@ const InstagramSection = () => {
     if (currentSlide >= totalSlides - bufferZone || currentSlide < bufferZone) {
       const timer = setTimeout(() => {
         if (sliderRef.current) {
-          // Safari向けtransition最適化
+          // transitionを無効にしてスムーズにリセット
           sliderRef.current.style.transition = 'none';
-          sliderRef.current.style.webkitTransition = 'none'; // Safari向け
           setCurrentSlide(midPoint);
           
-          // Safari向けにrequestAnimationFrameを二重にする
+          // 次のフレームでtransitionを復元
           requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              if (sliderRef.current) {
-                sliderRef.current.style.transition = 'transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                sliderRef.current.style.webkitTransition = 'transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-              }
-            });
+            if (sliderRef.current) {
+              sliderRef.current.style.transition = 'transform 500ms ease-out';
+            }
           });
         }
-      }, 100); // Safari向けに遅延調整
+      }, 50);
       
       return () => clearTimeout(timer);
     }
@@ -147,20 +140,14 @@ const InstagramSection = () => {
           </p>
         </div>
 
-        {/* スライドカルーセル（Safari最適化） */}
+        {/* スライドカルーセル（シンプル版） */}
         <div className="relative overflow-hidden">
           <div 
             ref={sliderRef}
             className={`flex ${isDragging ? '' : 'transition-transform duration-500 ease-out'}`}
             style={{
-              transform: `translate3d(calc(-${currentSlide * 60}% + 20% + ${isDragging ? -dragOffset : 0}px), 0, 0)`,
-              willChange: 'transform', // Safari向けパフォーマンス最適化
-              WebkitTransform: `translate3d(calc(-${currentSlide * 60}% + 20% + ${isDragging ? -dragOffset : 0}px), 0, 0)`, // Safari向け
-              WebkitWillChange: 'transform', // Safari向け
-              touchAction: 'pan-x', // Safari向けタッチ動作制御
-              WebkitTouchCallout: 'none', // Safari向けコンテキストメニュー無効
-              WebkitUserSelect: 'none', // Safari向け選択無効
-              userSelect: 'none'
+              transform: `translateX(calc(-${currentSlide * 60}% + 20% + ${isDragging ? -dragOffset : 0}px))`,
+              touchAction: 'pan-x'
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -179,27 +166,15 @@ const InstagramSection = () => {
                 key={`${post.id}-${index}`}
                   className="flex-shrink-0 w-3/5 px-2"
               >
-                  {/* カード（Safari最適化） */}
+                  {/* カード */}
                   <div 
-                    className={`relative bg-white shadow-lg border border-sophisticated-100 overflow-hidden cursor-pointer ${
+                    className={`relative bg-white shadow-lg border border-sophisticated-100 overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl hover:scale-105 ${
                       isCenter ? 'scale-100 opacity-100' : 'scale-100 opacity-70'
                     }`}
-                    style={{
-                      transition: 'all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                      WebkitTransition: 'all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                      transform: 'translateZ(0)', // Safari向けハードウェアアクセラレーション
-                      WebkitTransform: 'translateZ(0)',
-                      WebkitBackfaceVisibility: 'hidden', // Safari向けちらつき防止
-                      backfaceVisibility: 'hidden'
-                    }}
-                    onClick={() => window.open(post.instagramUrl, '_blank')}
-                    onTouchStart={(e) => {
-                      e.currentTarget.style.transform = 'scale(0.98) translateZ(0)';
-                      e.currentTarget.style.WebkitTransform = 'scale(0.98) translateZ(0)';
-                    }}
-                    onTouchEnd={(e) => {
-                      e.currentTarget.style.transform = 'scale(1) translateZ(0)';
-                      e.currentTarget.style.WebkitTransform = 'scale(1) translateZ(0)';
+                    onClick={() => {
+                      if (!isDragging && Math.abs(dragOffset) < 10) {
+                        window.open(post.instagramUrl, '_blank');
+                      }
                     }}
                   >
                     {/* Instagram画像 */}
@@ -207,15 +182,7 @@ const InstagramSection = () => {
                       <img 
                         src={post.image}
                         alt={post.caption}
-                        className="w-full h-full object-cover"
-                        style={{
-                          transition: 'transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                          WebkitTransition: 'transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                          transform: 'translateZ(0)', // Safari向けハードウェアアクセラレーション
-                          WebkitTransform: 'translateZ(0)',
-                          WebkitBackfaceVisibility: 'hidden',
-                          backfaceVisibility: 'hidden'
-                        }}
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                         onError={(e) => {
                           // 画像読み込みエラーの場合はプレースホルダーを表示
                           e.target.style.display = 'none';
