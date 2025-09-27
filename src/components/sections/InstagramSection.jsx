@@ -106,13 +106,21 @@ const InstagramSection = () => {
       const velocity = Math.abs(dragOffset) / 100; // 速度も考慮
       
       if (Math.abs(dragOffset) > threshold || velocity > 0.3) {
-        if (dragOffset > 0) {
-          // 右にスワイプ（次のスライド）
-          setCurrentSlide(prev => prev + 1);
-        } else {
-          // 左にスワイプ（前のスライド）
-          setCurrentSlide(prev => prev - 1);
-        }
+        // Safari向けtransition強制適用
+        forceTransition();
+        
+        setTimeout(() => {
+          if (dragOffset > 0) {
+            // 右にスワイプ（次のスライド）
+            setCurrentSlide(prev => prev + 1);
+          } else {
+            // 左にスワイプ（前のスライド）
+            setCurrentSlide(prev => prev - 1);
+          }
+        }, 10);
+      } else {
+        // スワイプが閾値未満の場合もtransitionを適用
+        forceTransition();
       }
     }
     
@@ -120,18 +128,50 @@ const InstagramSection = () => {
     setTimeout(() => setSwipeDirection(null), 100); // 少し遅延してリセット
   };
 
-  // 自動スライド機能（完全シームレスループ）
+  // Safari向けtransition強制適用
+  const forceTransition = () => {
+    if (sliderRef.current) {
+      requestAnimationFrame(() => {
+        if (sliderRef.current) {
+          sliderRef.current.style.transition = 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          sliderRef.current.style.WebkitTransition = 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          
+          // Safari向けに二重でrequestAnimationFrame
+          requestAnimationFrame(() => {
+            if (sliderRef.current) {
+              // transformを再適用してtransitionを確実に発火
+              const currentTransform = sliderRef.current.style.transform;
+              sliderRef.current.style.transform = '';
+              requestAnimationFrame(() => {
+                if (sliderRef.current) {
+                  sliderRef.current.style.transform = currentTransform;
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  };
+
+  // 自動スライド機能（Safari transition最適化）
   useEffect(() => {
     const timer = setInterval(() => {
       if (!isDragging) {
-        setCurrentSlide((prev) => prev + 1);
+        // Safari向けにtransitionを強制適用
+        forceTransition();
+        
+        // 少し遅延してからスライド変更
+        setTimeout(() => {
+          setCurrentSlide((prev) => prev + 1);
+        }, 10);
       }
     }, 4000); // 4秒ごとにスライド
 
     return () => clearInterval(timer);
   }, [isDragging]);
 
-  // シンプルなシームレスリセット処理
+  // Safari最適化されたシームレスリセット処理
   useEffect(() => {
     const totalSlides = posts.length * 30; // 30セット分
     const midPoint = posts.length * 15; // 中央点
@@ -141,15 +181,21 @@ const InstagramSection = () => {
     if (currentSlide >= totalSlides - bufferZone || currentSlide < bufferZone) {
       const timer = setTimeout(() => {
         if (sliderRef.current) {
-          // transitionを無効にしてスムーズにリセット
+          // Safari向けtransition無効化
           sliderRef.current.style.transition = 'none';
+          sliderRef.current.style.WebkitTransition = 'none';
           setCurrentSlide(midPoint);
           
-          // 次のフレームでtransitionを復元
+          // Safari向けに三重のrequestAnimationFrame
           requestAnimationFrame(() => {
-            if (sliderRef.current) {
-              sliderRef.current.style.transition = 'transform 500ms ease-out';
-            }
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                if (sliderRef.current) {
+                  sliderRef.current.style.transition = 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                  sliderRef.current.style.WebkitTransition = 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                }
+              });
+            });
           });
         }
       }, 50);
@@ -164,10 +210,16 @@ const InstagramSection = () => {
 
   const extendedPosts = getExtendedPosts();
 
-  // passive: false でイベントリスナーを設定（Safari向け）
+  // Safari向け初期化とpassive: false イベントリスナー
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
+
+    // Safari向け初期transition設定
+    slider.style.transition = 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    slider.style.WebkitTransition = 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    slider.style.willChange = 'transform';
+    slider.style.WebkitWillChange = 'transform';
 
     const handleTouchStartPassive = (e) => {
       if (swipeDirection === 'horizontal') {
@@ -205,16 +257,24 @@ const InstagramSection = () => {
           </p>
         </div>
 
-        {/* スライドカルーセル（Safari最適化版） */}
+        {/* スライドカルーセル（Safari transition最適化版） */}
         <div className="relative overflow-hidden" style={{ touchAction: 'pan-x' }}>
           <div 
             ref={sliderRef}
-            className={`flex ${isDragging && swipeDirection === 'horizontal' ? '' : 'transition-transform duration-500 ease-out'}`}
+            className="flex"
             style={{
-              transform: `translateX(calc(-${currentSlide * 60}% + 20% + ${isDragging && swipeDirection === 'horizontal' ? -dragOffset : 0}px))`,
+              transform: `translate3d(calc(-${currentSlide * 60}% + 20% + ${isDragging && swipeDirection === 'horizontal' ? -dragOffset : 0}px), 0, 0)`,
+              transition: isDragging && swipeDirection === 'horizontal' ? 'none' : 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              WebkitTransition: isDragging && swipeDirection === 'horizontal' ? 'none' : 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              willChange: 'transform',
+              WebkitWillChange: 'transform',
               touchAction: 'pan-x',
               userSelect: 'none',
-              WebkitUserSelect: 'none'
+              WebkitUserSelect: 'none',
+              WebkitBackfaceVisibility: 'hidden',
+              backfaceVisibility: 'hidden',
+              WebkitPerspective: '1000px',
+              perspective: '1000px'
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
