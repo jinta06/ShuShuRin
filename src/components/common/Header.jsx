@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
+import { trackInstagramDM, trackNavigation } from '../../utils/analytics';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,10 +18,22 @@ const Header = () => {
   const handleNavClick = (path) => {
     setIsMenuOpen(false);
     
+    // GA4ナビゲーション追跡
+    trackNavigation(path, location.pathname);
+    
     // ページトップにスクロール
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 100);
+  };
+
+  // Instagram DMボタンクリック処理
+  const handleInstagramDMClick = () => {
+    // GA4イベント追跡
+    trackInstagramDM('header');
+    
+    // Instagram DM画面を開く
+    window.open('https://www.instagram.com/shu.shu.rin/', '_blank');
   };
 
 
@@ -182,7 +195,7 @@ const Header = () => {
           <div className="mt-8 pt-6 border-t border-sophisticated-100">
             <button
               onClick={() => {
-                window.open('https://www.instagram.com/shu.shu.rin/', '_blank');
+                handleInstagramDMClick();
                 toggleMenu();
               }}
               className="flex items-center px-4 py-3 text-base text-sophisticated-500 hover:text-brand-accent transition-colors duration-200 w-full text-left"
