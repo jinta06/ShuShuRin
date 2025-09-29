@@ -154,7 +154,7 @@ const BrandStory = () => {
                     温かみのある外観
                   </h3>
                   <p className="text-sm text-white/90 leading-relaxed">
-                    小さな路地にひっそりと佇む<br />
+                    住宅街にひっそりと佇む<br />
                     アットホームな雰囲気のお店
                   </p>
                 </div>
