@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HeartIcon, SparklesIcon, StarIcon } from '@heroicons/react/24/outline';
 import { concepts } from '../data/concepts';
+import SEOHead from '../components/common/SEOHead';
 
 const Concept = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    // ページタイトル設定
-    document.title = 'コンセプト | Shu Shu Rin';
+    // ページタイトル設定（SEOHeadで管理するためコメントアウト）
+    // document.title = 'コンセプト | Shu Shu Rin';
     
     // URLのハッシュがある場合、該当セクションにスクロール（ヘッダー高さを考慮）
     if (window.location.hash) {
@@ -49,8 +50,42 @@ const Concept = () => {
     }, 100);
   };
 
+  // コンセプトページ専用の構造化データ
+  const conceptStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    'name': 'コンセプト | Shu Shu Rin',
+    'description': '年齢に縛られない自分らしいスタイル、本当に着たい服選び、自分だけの特別を見つける喜び。Shu Shu Rin（シュシュリン）の3つのコンセプトをご紹介します。',
+    'url': 'https://www.shushurin.com/concept',
+    'mainEntity': [
+      {
+        '@type': 'Thing',
+        'name': '年齢に縛られない好きを纏う',
+        'description': '年齢や流行にとらわれず、今の自分がときめく一着を自由に選んでほしい。'
+      },
+      {
+        '@type': 'Thing', 
+        'name': '「なんとなく選ぶ」から、「本当に着たい服を選ぶ」へ',
+        'description': 'あなたらしいスタイルを一緒に見つけ、「これが好き」に出会える瞬間を大切にします。'
+      },
+      {
+        '@type': 'Thing',
+        'name': '自分だけの特別を見つける喜び', 
+        'description': '素材やデザイン、細部にまでこだわったアイテムで、日常に彩りを添える一着を見つけませんか。'
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-brand-secondary pt-20">
+      {/* SEO設定 */}
+      <SEOHead 
+        title="コンセプト | Shu Shu Rin（シュシュリン）"
+        description="年齢に縛られない自分らしいスタイル、本当に着たい服選び、自分だけの特別を見つける喜び。Shu Shu Rin（シュシュリン）の3つのコンセプトをご紹介します。大阪狭山市のアパレルセレクトショップ。"
+        keywords="コンセプト, Shu Shu Rin, シュシュリン, 年齢に縛られない, 服選び, 自分らしいスタイル, アパレル, セレクトショップ, 大阪狭山市, ファッション哲学"
+        url="https://www.shushurin.com/concept"
+        structuredData={conceptStructuredData}
+      />
       {/* ヒーローセクション */}
       <section className="py-16 px-4 text-center">
         <div className="max-w-lg mx-auto">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeartIcon, SparklesIcon, StarIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import SEOHead from '../components/common/SEOHead';
 
 // 画像のimport
 import ownersPhotoWebp from '../assets/images/brandstory/owners-photo.webp';
@@ -10,8 +11,50 @@ import storeInteriorWebp from '../assets/images/brandstory/store-interior.webp';
 import storeInteriorJpg from '../assets/images/brandstory/store-interior.jpg';
 
 const BrandStory = () => {
+  // ブランドストーリーページ専用の構造化データ
+  const brandStoryStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    'name': 'ブランドストーリー | Shu Shu Rin',
+    'description': '姉妹で営む小さなアパレルセレクトショップ Shu Shu Rin（シュシュリン）の始まりと想いをご紹介。年齢を脱ぐ、冒険を着るというコンセプトで生まれた店舗です。',
+    'url': 'https://www.shushurin.com/brand-story',
+    'mainEntity': {
+      '@type': 'Organization',
+      'name': 'Shu Shu Rin',
+      'alternateName': 'シュシュリン',
+      'description': '年齢を脱ぐ、冒険を着る。姉妹で営む小さなアパレルセレクトショップ',
+      'foundingDate': '2023',
+      'founders': [
+        {
+          '@type': 'Person',
+          'name': 'Shu Shu Rin 姉妹',
+          'jobTitle': '店主・スタイリスト'
+        }
+      ],
+      'address': {
+        '@type': 'PostalAddress',
+        'streetAddress': '狭山2-942-6',
+        'addressLocality': '大阪狭山市',
+        'addressRegion': '大阪府',
+        'postalCode': '589-0005',
+        'addressCountry': 'JP'
+      },
+      'sameAs': [
+        'https://www.instagram.com/shushurin_select/'
+      ]
+    }
+  };
+
   return (
     <main className="min-h-screen bg-brand-secondary pt-20">
+      {/* SEO設定 */}
+      <SEOHead 
+        title="ブランドストーリー | Shu Shu Rin（シュシュリン）"
+        description="姉妹で営む小さなアパレルセレクトショップ Shu Shu Rin（シュシュリン）の始まりと想いをご紹介。年齢を脱ぐ、冒険を着るというコンセプトで生まれた大阪狭山市の店舗です。"
+        keywords="ブランドストーリー, Shu Shu Rin, シュシュリン, 姉妹ショップ, 店主紹介, アパレル, セレクトショップ, 大阪狭山市, 年齢を脱ぐ冒険を着る, 店舗の想い"
+        url="https://www.shushurin.com/brand-story"
+        structuredData={brandStoryStructuredData}
+      />
       {/* ヒーローセクション */}
       <section className="py-16 px-4 text-center">
         <div className="max-w-lg mx-auto">
