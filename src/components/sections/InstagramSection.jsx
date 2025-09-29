@@ -3,12 +3,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
+import { trackInstagramDM, trackExternalLink } from '../../utils/analytics';
 
 // Instagram画像をインポート
 import instagramImage1 from '../../assets/images/instagram/instagram_newstyle.webp';
-import instagramImage2 from '../../assets/images/instagram/instagram_sister.webp';
-import instagramImage3 from '../../assets/images/instagram/instagram_interior.webp';
-import instagramImage4 from '../../assets/images/instagram/instagram_stylingpoint_02.webp';
+import instagramImage2 from '../../assets/images/instagram/instagram_sister_02.webp';
+import instagramImage3 from '../../assets/images/instagram/instagram_interior_02.webp';
+import instagramImage4 from '../../assets/images/instagram/instagram_stylingpoint_03.webp';
 
 const InstagramSection = () => {
   // 4つの投稿データ（画像とキャプション）
@@ -16,7 +17,7 @@ const InstagramSection = () => {
     {
       id: 1,
       image: instagramImage1,
-      caption: '新作コーディネートをご紹介✨',
+      caption: '新作コーディネートをご紹介',
       instagramUrl: 'https://www.instagram.com/p/DNqDG_dT2YL/?img_index=1'
     },
     {
@@ -35,7 +36,7 @@ const InstagramSection = () => {
       id: 4,
       image: instagramImage4,
       caption: 'スタイリングのポイントをご紹介',
-      instagramUrl: 'https://www.instagram.com/p/DOGU92-k30-/?img_index=1'
+      instagramUrl: 'https://www.instagram.com/p/DOgLmrME5zI/?img_index=1'
     }
   ];
 
@@ -45,7 +46,20 @@ const InstagramSection = () => {
   const swiperRef = useRef(null);
 
   const handleInstagramProfile = () => {
+    // GA4イベント追跡
+    trackInstagramDM('instagram_section');
+    
+    // Instagram プロフィール画面を開く
     window.open('https://www.instagram.com/shu.shu.rin/', '_blank');
+  };
+
+  // Instagram投稿クリック処理
+  const handleInstagramPost = (postUrl) => {
+    // GA4イベント追跡
+    trackExternalLink('instagram_post', postUrl);
+    
+    // Instagram投稿を開く
+    window.open(postUrl, '_blank');
   };
 
   return (
@@ -107,7 +121,7 @@ const InstagramSection = () => {
                           ? 'scale-100 opacity-100 hover:scale-105' 
                           : 'scale-90 opacity-60 hover:scale-95 grayscale-[30%]'
                       }`}
-                      onClick={() => window.open(post.instagramUrl, '_blank')}
+                      onClick={() => handleInstagramPost(post.instagramUrl)}
                     >
                       {/* Instagram画像 */}
                       <div className="aspect-[4/5] overflow-hidden">

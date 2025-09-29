@@ -1,3 +1,19 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# 重要なページの優先度設定
+Crawl-delay: 1
+
+# サイトマップの場所
+Sitemap: https://www.shushurin.com/sitemap.xml
+
+# 除外するディレクトリ（現在は無し）
+# Disallow: /admin/
+# Disallow: /private/
+
+# 主要ページへの直接アクセス推奨
+# ホームページ: https://www.shushurin.com/
+# コンセプト: https://www.shushurin.com/concept
+# コーディネート: https://www.shushurin.com/coordinate
+# ブランドストーリー: https://www.shushurin.com/brand-story
+# お問い合わせ: https://www.shushurin.com/contact

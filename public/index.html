@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VMWSZCBJMF"></script>
@@ -14,27 +14,79 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="theme-color" content="#2C2C2C" />
+    
+    <!-- 基本SEOメタタグ (デフォルト値) -->
+    <meta name="description" content="年齢を脱ぐ、冒険を着る。大阪狭山市のアパレルセレクトショップ Shu Shu Rin（シュシュリン）。姉妹で営む小さなセレクトショップで、あなたらしいスタイルを見つけませんか。" />
+    <meta name="keywords" content="Shu Shu Rin, シュシュリン, アパレル, セレクトショップ, 大阪狭山市, 大阪, コーディネート相談, ファッション, 年齢を脱ぐ冒険を着る, 姉妹ショップ" />
+    <meta name="author" content="Shu Shu Rin" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Shu Shu Rin | 年齢を脱ぐ、冒険を着る" />
+    <meta property="og:description" content="年齢を脱ぐ、冒険を着る。大阪狭山市のアパレルセレクトショップ Shu Shu Rin（シュシュリン）。姉妹で営む小さなセレクトショップで、あなたらしいスタイルを見つけませんか。" />
+    <meta property="og:image" content="https://www.shushurin.com/logo512.png" />
+    <meta property="og:url" content="https://www.shushurin.com" />
+    <meta property="og:site_name" content="Shu Shu Rin" />
+    <meta property="og:locale" content="ja_JP" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Shu Shu Rin | 年齢を脱ぐ、冒険を着る" />
+    <meta name="twitter:description" content="年齢を脱ぐ、冒険を着る。大阪狭山市のアパレルセレクトショップ Shu Shu Rin（シュシュリン）。姉妹で営む小さなセレクトショップで、あなたらしいスタイルを見つけませんか。" />
+    <meta name="twitter:image" content="https://www.shushurin.com/logo512.png" />
+    
+    <!-- 地域SEO -->
+    <meta name="geo.region" content="JP-27" />
+    <meta name="geo.placename" content="大阪狭山市" />
+    <meta name="geo.position" content="34.516667;135.55" />
+    <meta name="ICBM" content="34.516667, 135.55" />
+    
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Shu Shu Rin</title>
+    
+    <!-- 構造化データ (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "Shu Shu Rin",
+      "alternateName": "シュシュリン",
+      "description": "年齢を脱ぐ、冒険を着る。姉妹で営む小さなアパレルセレクトショップ",
+      "url": "https://www.shushurin.com",
+      "image": "https://www.shushurin.com/logo512.png",
+      "telephone": "",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "狭山2-942-6",
+        "addressLocality": "大阪狭山市",
+        "addressRegion": "大阪府",
+        "postalCode": "589-0005",
+        "addressCountry": "JP"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "34.516667",
+        "longitude": "135.55"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "10:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/shushurin_select/"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Shu Shu Rin 姉妹"
+      },
+      "slogan": "年齢を脱ぐ、冒険を着る"
+    }
+    </script>
+    
+    <title>Shu Shu Rin | 年齢を脱ぐ、冒険を着る</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

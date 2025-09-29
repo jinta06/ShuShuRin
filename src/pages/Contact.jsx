@@ -4,8 +4,24 @@ import {
   QuestionMarkCircleIcon, 
   HeartIcon
 } from '@heroicons/react/24/outline';
+import SEOHead from '../components/common/SEOHead';
+import { trackInstagramDM, trackConsultationInquiry } from '../utils/analytics';
+import { usePageTracking } from '../hooks/usePageTracking';
 
 const Contact = () => {
+  // ページエンゲージメント追跡
+  usePageTracking('contact');
+
+  // Instagram DMボタンクリック処理
+  const handleInstagramDMClick = () => {
+    // GA4イベント追跡
+    trackInstagramDM('contact_page');
+    trackConsultationInquiry('contact_page');
+    
+    // Instagram DM画面を開く
+    window.open('https://www.instagram.com/shu.shu.rin/', '_blank');
+  };
+
   // よくある質問データ
   const faqData = [
     {
@@ -40,8 +56,54 @@ const Contact = () => {
     }
   ];
 
+  // コンタクトページ専用の構造化データ
+  const contactStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    'name': 'お問い合わせ | Shu Shu Rin',
+    'description': 'Shu Shu Rin（シュシュリン）へのお問い合わせはInstagram DMで承ります。コーディネート相談、商品のご質問、来店予約など、お気軽にご連絡ください。',
+    'url': 'https://www.shushurin.com/contact',
+    'mainEntity': {
+      '@type': 'FAQPage',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': 'コーディネート相談は無料ですか？',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'はい、無料でご相談いただけます。お気軽にInstagram DMからお声がけください。'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': '来店予約は必要ですか？',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'ご予約をいただけますと、よりゆっくりとご相談いただけます。Instagram DMから事前にご連絡ください。'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'どのような年代の方が多いですか？',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': '20代から70代まで、幅広い年齢層の方にご利用いただいています。年齢を気にせず、お気軽にお越しください。'
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <main className="min-h-screen bg-brand-secondary pt-20">
+      {/* SEO設定 */}
+      <SEOHead 
+        title="お問い合わせ | Shu Shu Rin（シュシュリン）"
+        description="Shu Shu Rin（シュシュリン）へのお問い合わせはInstagram DMで承ります。コーディネート相談、商品のご質問、来店予約など、お気軽にご連絡ください。大阪狭山市のアパレルセレクトショップ。"
+        keywords="お問い合わせ, Instagram DM, コーディネート相談, Shu Shu Rin, シュシュリン, アパレル, セレクトショップ, 大阪狭山市, 来店予約, よくある質問"
+        url="https://www.shushurin.com/contact"
+        structuredData={contactStructuredData}
+      />
       {/* ヒーローセクション */}
       <section className="py-16 px-4 text-center">
         <div className="max-w-lg mx-auto">
@@ -115,7 +177,7 @@ const Contact = () => {
           {/* Instagram DMボタン */}
           <div className="text-center">
             <button
-              onClick={() => window.open('https://www.instagram.com/shu.shu.rin/', '_blank')}
+              onClick={handleInstagramDMClick}
               className="
                 bg-brand-accent text-white 
                 px-8 py-3 rounded-full 
