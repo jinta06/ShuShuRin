@@ -12,7 +12,7 @@ import instagramImage4 from '../../assets/images/instagram/instagram_stylingpoin
 
 const InstagramSection = () => {
   // 4つの投稿データ（画像とキャプション）
-  const posts = [
+  const originalPosts = [
     {
       id: 1,
       image: instagramImage1,
@@ -38,6 +38,9 @@ const InstagramSection = () => {
       instagramUrl: 'https://www.instagram.com/p/DOGU92-k30-/?img_index=1'
     }
   ];
+
+  // ループを確実に動作させるため、スライドを十分に確保
+  const posts = [...originalPosts, ...originalPosts];
 
   const swiperRef = useRef(null);
 
@@ -68,6 +71,7 @@ const InstagramSection = () => {
             slidesPerView={2.2}
             spaceBetween={15}
             loop={true}
+            loopedSlides={8}
             autoplay={{
               delay: 4000,
               disableOnInteraction: false,
@@ -76,6 +80,7 @@ const InstagramSection = () => {
             speed={600}
             touchRatio={1.2}
             grabCursor={true}
+            watchSlidesProgress={true}
             breakpoints={{
               320: {
                 slidesPerView: 1.8,
@@ -93,7 +98,7 @@ const InstagramSection = () => {
             className="w-full"
           >
             {posts.map((post, index) => (
-              <SwiperSlide key={post.id} className="!h-auto">
+              <SwiperSlide key={`${post.id}-${index}`} className="!h-auto">
                 {({ isActive }) => (
                   <div>
                     <div 
