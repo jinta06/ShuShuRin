@@ -6,7 +6,7 @@ import 'swiper/css/effect-coverflow';
 import { trackInstagramDM, trackExternalLink } from '../../utils/analytics';
 
 // Instagram画像をインポート
-import instagramImage1 from '../../assets/images/instagram/instagram_newstyle.webp';
+import instagramImage1 from '../../assets/images/instagram/instagram_newstyle_02.webp';
 import instagramImage2 from '../../assets/images/instagram/instagram_sister_02.webp';
 import instagramImage3 from '../../assets/images/instagram/instagram_interior_02.webp';
 import instagramImage4 from '../../assets/images/instagram/instagram_stylingpoint_03.webp';
@@ -18,7 +18,7 @@ const InstagramSection = () => {
       id: 1,
       image: instagramImage1,
       caption: '新作コーディネートをご紹介',
-      instagramUrl: 'https://www.instagram.com/p/DNqDG_dT2YL/?img_index=1'
+      instagramUrl: 'https://www.instagram.com/shu.shu.rin/'
     },
     {
       id: 2,
