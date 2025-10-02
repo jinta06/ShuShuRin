@@ -18,7 +18,7 @@ const InstagramSection = () => {
       id: 1,
       image: instagramImage1,
       caption: '新作コーディネートをご紹介',
-      instagramUrl: 'https://www.instagram.com/shu.shu.rin/'
+      instagramUrl: 'https://www.instagram.com/p/DPTaz2rE-5J/?img_index=1'
     },
     {
       id: 2,
