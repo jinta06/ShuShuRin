@@ -130,7 +130,7 @@ const Concept = () => {
               <div className="space-y-4">
                 {concept.fullDescription.split('\n').map((paragraph, idx) => (
                   <p key={idx} className="text-sophisticated-500 text-sm leading-relaxed text-center">
-                    {paragraph}
+                    <span dangerouslySetInnerHTML={{ __html: paragraph }} />
                   </p>
                 ))}
               </div>
